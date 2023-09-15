@@ -1,0 +1,689 @@
+﻿R:0047:Ctrl1_Status_47
+R:0048:Ctrl2_Status_48
+R:0049:Ctrl1_Prev_Status_49
+R:004A:Ctrl2_Prev_Status_4A
+R:004B:PPU_Last_Frame_Rendered_4B
+R:004C:PPU_Last_Frame_Acknowledged_4C
+R:0054:Ctrl1_Change_Status1_54:A B Sel St | U D L R\n$80 = A\n$40 = B\n$20 = Select\n$10 = Start\n$8 = Up\n$4 = Down\n$2 = Left\n$1 = Right
+R:0055:Ctrl2_Change_Status1_55
+R:005A:Ctrl1_Change_Status2_5A:A B Sel St | U D L R\n$80 = A\n$40 = B\n$20 = Select\n$10 = Start\n$8 = Up\n$4 = Down\n$2 = Left\n$1 = Right
+R:005B:Ctrl2_Change_Status2_5B
+R:005E:Current_ROM_Bank_5E
+R:0090:Health_100s_90
+R:0091:Health_10s_91
+R:0092:Health_1s_92
+R:0093:Energy_100s_93
+R:0094:Energy_10s_94
+R:0095:Energy_1s_95
+R:0201:Entity0_Timer0_204
+R:0204:Entity0_Timer1_204
+R:0207:Enemy_XPos_Frac_207
+R:0208:Enemy_XPos_Int_208
+R:0209:Enemy_XPos_Page_209
+R:020A:Enemy_YPos_Frac_20A
+R:020B:Enemy_YPos_Int_20B
+R:020C:Enemy_YPos_Page_20C
+R:020F:Enemy_Palette_20F
+R:0212:Enemy_XVelo_Frac_212
+R:0213:Enemy_XVelo_Int_213
+R:0214:Enemy_YVelo_Frac_214
+R:0215:Enemy_YVelo_Int_215
+R:0219:Entity0_Type_219
+R:0222:Enemy_Damage_222
+R:0259:Entity1_Type_259
+R:0299:Entity2_Type_299
+R:02D9:Entity3_Type_2D9
+R:048B:Strider_Lvl_48B:Each Level adds a new Trick
+R:048D:Strider_Boots_and_Plasma_Arrow_48D:$00 = No Boots\n1xxx xxxx = Aqua Boots\nx1xx xxxx = Magnet Boots\nxx1x xxxx = Attack Boots\nxxxx xxx1 = Plasma Arrow
+R:048E:Strider_Data_Files_Acquired_48E:xxxx xxxx\n1234
+R:0490:Return_from_Menu_Wait_Timer_490
+R:04BD:____something_4BD
+R:0500:____something_500:$A0 = Lock Scrolling
+R:0507:Strider_XPos_Frac_507
+R:0508:Strider_XPos_Int_508
+R:050A:Strider_YPos_Frac_50A
+R:050B:Strider_YPos_Int_50B
+R:050D:Env_Strider_Front_Shin_During_Jump_50D
+R:050E:Strider_Controller_Input_50E:A B Sel St | U D L R\n$80 = A\n$40 = B\n$20 = Select\n$10 = Start\n$8 = Up\n$4 = Down\n$2 = Left\n$1 = Right
+R:050F:Strider_Sprite_Attribute_Control_50F
+R:0512:Strider_XVelo_Frac_512
+R:0513:Strider_XVelo_Int_513
+R:0514:Strider_YVelo_Frac_514
+R:0515:Strider_YVelo_Int_515
+R:051B:Strider_Direction_51B:01 = Facing Right\n02 = Facing Left
+R:0527:Strider_Jump_Frame_527
+R:0528:Strider_Jump_Type_528:$00 = Normal Jump\n$03 = Downhill Jump (Momentum >= 12)\n$06 = Downhill Jump (Momentum >= 24)
+R:0536:Trick_Enabled_ID_536
+R:0537:Trick_Energy_Cost_537
+R:0538:Trick_Timer_538:Timer for how long the trick can last. \nLimits time for High Jump ability, for example.
+R:053A:cameraXPos_Frac_53A
+R:053B:cameraXPos_Int_53B
+R:053C:cameraXPos_Page_53C
+R:053D:cameraYPos_Frac_53D
+R:053E:cameraYPos_Int_53E
+R:053F:cameraYPos_Page_53F
+R:0540:Strider_Downhill_Momentum_Right_540
+R:0541:Strider_Downhill_Momentum_Left_541
+R:054B:Strider_Height_54B
+R:054C:Env_Strider_Lower_Ground_Center_54C
+R:054D:Strider_Fall_YVelo_Frac_54D
+R:054E:Strider_Fall_YVelo_Int_54E
+R:0550::Usually holds Strider XPos Int...
+R:0553:Env_Strider_Front_Head_553
+R:0555:Env_Strider_Direction_555
+R:055A:Env_Strider_Front_Toe_55A
+R:055B:Strider_Jump_Last_Controller_LR_Press_55B:Also used for knockback
+R:055E:Env_Strider_Front_Heel_55E
+R:0561:____something_561
+R:0562:Env_Strider_Lower_Far_Front_562
+R:0563:Strider_Invulnerability_Timer_563
+R:0569:Strider_Health_569
+R:056B:Strider_Energy_56B
+R:056D:Strider_Last_Controller_Jump_Action_56D:A B Sel St | U D L R\n$80 = A\n$40 = B\n$20 = Select\n$10 = Start\n$8 = Up\n$4 = Down\n$2 = Left\n$1 = Right
+R:0760:ROAM_YPos_760
+R:0761:ROAM_TileID_761
+R:0762:ROAM_Attributes_762
+R:0763:ROAM_XPos_763
+P:06D4:__86D4
+P:408B::Filter out A press from controller change.
+P:4202::<- Hardcoded value
+P:4355:__8355
+P:4361:__8361
+P:436F:__836F
+P:437B::Skip ahead if no Invulnerability Timer
+P:438B:__838B
+P:4398:__8398
+P:43B8::Neg. Return value may skip over jump handler and more.
+P:43C0::1-2... Skip a few (Scrolling related?)
+P:43C3:__83C3:Lots
+P:43C6::of
+P:43C9::Physics
+P:43CC::stuff
+P:43D5:__83D5
+P:43F3:__83F3
+P:4418:__8418
+P:45B7::If $500 = #$20, Scrolling is locked
+P:45B9::Scrolling locked? Skip ahead, filter $561, and RTS
+P:45C0::Check for #$08
+P:45C8:__85C8
+P:45E4:Return_Strider_to_Center:\nReturns Strider to center of screen. Used after a boss fight with a locked camera.
+P:45EA::Skip ahead if cameraXPage isn't 0.
+P:45EC::Scroll Left Boundary Check
+P:45F2:__85F2
+P:45F6::Scroll Right Boundary Check
+P:45FA:__85FA
+P:4609:__8609
+P:460D:__860D
+P:464C:Strider_Standing:\nStrider standing still. Check behind him.
+P:4650::Strider facing right. Subtract 16 pixels for back check.
+P:4654::Strider facing left. Add 16 pixels for back check.
+P:4656:Strider_Standing_Env_Check_Behind
+P:465F::Collision track behind Strider
+P:4662::(X +/-16, Y)
+P:4667::Restore Strider XPos
+P:4686:__8686
+P:46AA:__86AA
+P:46B1:__86B1
+P:46C4:__86C4_RTS
+P:46C5:__86C5
+P:47C9::<- Hardcoded value
+P:47E0::<- Hardcoded value
+P:4806:__8806:\nLots of criteria that may lead to wall ejection
+P:4809::Jump in progress. Skip ahead.
+P:4816::Front head not experiencing collision. Jump ahead.
+P:4818::\nFront head is experiencing collision. Check Lower ground.
+P:481F::If Strider is not on the ground (falling, perhaps), skip ahead.
+P:4821::\nStrider is on the ground.\nDoes he have any X Velocity?
+P:4827::If so, skip ahead
+P:4829::\nStrider:\n1: Is hitting his head\n2: Is on the ground\n3: Does not have an X Velocity.\nTarget for environmental check 16 pixels behind him?
+P:482D::+16
+P:4831::-16
+P:4833:__8833
+P:483F::Collision Check: (X+/-16,Y)
+P:484E:__884E
+P:486D:__886D
+P:487A:__887A
+P:4885:__8885
+P:488F:__888F
+P:48A4:__88A4
+P:48B1:__88B1_RTS
+P:48ED:__88ED
+P:4902:__8902
+P:4908::Damage Amount
+P:490A::Starting Jump Frame and Invulnerability Timer
+P:4912::A flag?
+P:491A::Another flag? (Ex: Hit by projectile)
+P:492B::... Action Direction = Reverse Face Direction
+P:492E:__892E_RTS
+P:492F:Damage_Strider_Sub
+P:4A61:__8A61
+P:4AD0::(X,Y)
+P:4AE5:__8AE5
+P:4AF4:__8AF4:\nHeel + head are on foreground tiles.\nSet sprite attribute control behind background flag.
+P:4AF6:__8AF6
+P:4B14:__8B14
+P:4B17::\nCriteria that may lead to clearing X Velocity.\n(Toe hits on right jump at wall)
+P:4B1A::Env Front collision(?) to Y
+P:4B20::If head didn't collide, jump ahead.
+P:4B28::If heel didn't collide, jump ahead.
+P:4B34:__8B34
+P:4B3A::Branch if there is any Yvelo
+P:4B4C:__8B4C
+P:4B4E::No front collision(?)
+P:4B50:__8B50:\nFront Collision occurred (I think). $545 overrides this for some reason.\nClear XVelocity.
+P:4B57::Clear
+P:4B5A::XVelocity
+P:4B87:__8B87
+P:4B98:__8B98:(Head hits on left jump w/ overhang)
+P:4BA1::Strider ducking, perhaps?
+P:4BB3:__8BB3
+P:4BBE:__8BBE
+P:4BF0:__8BF0_RTS
+P:4BF1:__8BF1
+P:4CDB:__8CDB_Loop
+P:4CE9:__8CE9:Perhaps some sort of strider-related spawn counter?
+P:4CF8:__8CF8
+P:4D05:__8D05
+P:4D23::Falling from jump?
+P:4D36:__8D36
+P:4D4E:__8D4E_RTS
+P:4D4F:__8D4F
+P:4D58:__8D58
+P:4DBE:__8DBE_RTS
+P:4DBF:__8DBF
+P:4DC7::If ($524 filtered) or Strider is jumping, get out.
+P:4DEE:__8DEE
+P:4E65:__8E65
+P:4E74:__8E74
+P:4E87:__8E87
+P:4F01:__8F01_RTS
+P:4F02:____8F02_Sub
+P:4F0A::If jump frames are NOT in-progress,
+P:4F0C::skip to ground checks.
+P:4F0F:__8F0F:\nJump is in progress. Perform various checks.
+P:4F12::If head didn't hit environment...
+P:4F14::skip ahead.
+P:4F19::If head specifically hit $0F...
+P:4F1B::skip ahead.
+P:4F20::If front heel didn't hit
+P:4F22::skip ahead.
+P:4F26::Erase Jump Frame Counter
+P:4F33:__8F33
+P:4F3D:Strider_Check_Front_Shin
+P:4F42::Strider YPos - 16 pixels
+P:4F47::Front Shin during jump
+P:4F53::If no collision on front shin...
+P:4F55::skip ahead.
+P:4F5F:__8F5F
+P:4F64:Erase_Downhill_Momentum
+P:4F6C:Erase_All_Velocities_JMP
+P:4F6F:Strider_Toe_vs_Ground_Checks
+P:4F7D:Erase_Lateral_Velocities
+P:4F87:Erase_All_Velocities
+P:4F95:Strider_Lower_Ground_Check
+P:4F9A::Ground check
+P:4F9F::Strider (X,Y+8)
+P:4FA2::Env Results -> 54C
+P:4FA7::Store Filtered Ground Env results -> $07
+P:4FAD::(Wait... what about Jump Type 9?)
+P:4FB0::\nCompensate jump lookup with gravity or not?
+P:4FB3::Did we reach jump counter falling frames?
+P:4FB8::Did Lower Ground Collision occur?
+P:4FBA::Yes? Skip ahead.
+P:4FBF::Retain XVelo or not?
+P:4FC1::Zero XVelo.
+P:4FC9:Add_Fall_Velocity_or_Not_and_Exit:Includes Fall YVelo stuff
+P:4FCD:__8FCD
+P:4FF4:Begin_Gravity_Compensation:\nCompensate jump with +1.5 pixels
+P:4FF8:Roll_Gravity_Compensation:0.5 -> A
+P:5000::1.0 -> A
+P:5007:__9007_RTS
+P:500B::If jump not in progress, exit.
+P:5013::Erase
+P:5016::YVelocity
+P:5019::and stop jump
+P:501C::Erase XVelocity as well.
+P:501F:__901F_RTS
+P:508F:__908F
+P:50A5:__90A5_RTS
+P:50CC:Add_Fall_Velocity_Sub
+P:50D1::Get out if jump in progress
+P:50D9::Landed check
+P:50DD:Erase_Strider_Fall_Velocity_Sub
+P:50E5:Erase_Strider_Fall_Velocity_RTS
+P:50E6:Start_Fall_YVelocity
+P:50E9::Already "falling?" Skip ahead
+P:50F2::Initialize Fall Velo at 4.0
+P:50F7:Apply_Fall_YVelocity
+P:5103::Add to Fall Fraction to accelerate fall (aka gravity)
+P:5111::Terminal Velo for falling
+P:5113:__9113
+P:5116::\nRoll Fall YVelo into Main YVelo
+P:5245:__9245
+P:524A:__924A
+P:5253:__9253
+P:5256::Jump Frame >= 24?
+P:5258::Yes means still going up. Exit.
+P:525A::Jump Type 0
+P:5266::Jump Type 3
+P:526C::Jump Type 6
+P:526E:__926E
+P:5271:__9271_RTS
+P:5272:Handle_Downhill_Momentums_Sub
+P:5285:Handle_Downhill_Momentums_Sub_RTS
+P:5286:Add_to_Downhill_Momentum_Left
+P:5293:Add_to_Downhill_Momentum_Left_RTS
+P:5294:Handle_Downhill_Momentums_Pressing_Right
+P:529D:Add_to_Downhill_Momentum_Right
+P:52AA:Add_to_Downhill_Momentum_Right_RTS
+P:52C1:__92C1
+P:52CC:__92CC
+P:52DC:__92DC
+P:52F9:__RTS_Sub
+P:5345:__9345
+P:5368:__9368_RTS
+P:5369:_____9369_Sub
+P:536F::Branch if Strider has an XVelo
+P:537C:__937C
+P:5381:__9381
+P:5388:__9388
+P:538B::Save Strider XPos to Stack
+P:538C::(XPos +/- 8 Pixels for collision check)
+P:538F:Check_Front_Toe:Check toward front of Strider (X+/-8,Y?)
+P:5394::Collision check results ->55A
+P:5397::Skip ahead if no toe collision
+P:539B::Skip ahead if toe collision isn't block w/ $03 attributes
+P:53A0::Skip ahead if not jumping
+P:53A2::\nSkip ahead if there is any downhill momentum
+P:53A8::Skip to 93B1 if Downhill Momentum exists
+P:53AA::\nIf jump frame >= 42, skip ahead.
+P:53AD::If Jump Frame >= 42, skip ahead
+P:53B1:__93B1:\nToe Collision occurred.\nJump is in progress.\nClear any fall velocity.
+P:53B7::... Skip ahead if potential landing?
+P:53BC::... Skip ahead if potential landing?
+P:53BE:Strider_Stop_Jump_and_Lateral_Movement:\nClear Jump Frame Count and stop lateral movement\nReached if toe collision occurred during a jump\nand not landing on a platform
+P:53CB:Check_Strider_Head
+P:53D0::Subtract Height from Strider YPos to get "head" position
+P:53D3::Save for temporary top pixel check, perhaps?
+P:53DA::Temp filter of $500 value
+P:53DF::Strider (X+/-8,Y-Height)
+P:53E8::Collision check results ->553
+P:53FA:__93FA
+P:5414:__9414
+P:5430:__9430
+P:5431::Original YPos (?)
+P:5435::Original XPos (?)
+P:5440:__9440_RTS
+P:5441:Check_Strider_wXVelo_Front_8Px_Sub:Strider XPosition gets + or - 8 pixels for environmental check\nBased on his X VELOCITY.
+P:544A:__944A
+P:5473::Shove a 1 into 515?
+P:54E4::\nGet ready to setup Strider Velocities for frame.\nFirst - Clear all Velocities
+P:54F2::\nExamine things that would prevent velocity from being applied.
+P:54FD::Default X Velocity Integer
+P:54FF::Default X Velocity Fraction
+P:5517:__9517
+P:551E:__951E
+P:553F:__953F
+P:5542::Up or Down Pressed?
+P:5544::Yes? Get out.
+P:5549::Left or Right Pressed?
+P:554D::Jump in progress?
+P:5557:__9557_RTS
+P:5558:Handle_Strider_LeftRight_Controller_Press:\nAppears to be different depending on if left or right was pressed with jump\nor Last Controller Press needs handling.
+P:555B:__955B
+P:555E::Move Left XVelo Int
+P:5560::Move Left XVelo Frac
+P:5565:__9565
+P:557A:__957A
+P:5583:__9583
+P:5592:__9592
+P:5595::Did Front Heel hit something?
+P:5599::No? Use forward XVelocity
+P:559E::Did Front Head hit something?
+P:55A4:Save_Strider_XVelo
+P:55AA:After_Save_Strider_XVelo
+P:55BC:__95BC_RTS
+P:56FD:__96FD
+P:5714:__9714
+P:5726:__9726
+P:5731:__9731:Begin Triangle jump requirements...?
+P:5734:__9734
+P:573F:__973F
+P:576D:__976D
+P:57D0:__97D0
+P:57D3:__97D3
+P:57D6::no jump in progress if heel kick desired
+P:57E6:Skip_to_Jump_in_Progress
+P:57E9:No_Jump_In_Progress:\nIf a Jump was in progress, it needs to have been canceled (due to collision)\nbefore a triangle jump check can be executed.
+P:57F0::(Weird relation between 545 and 4BD)
+P:57FA::Make sure Strider is not on the ground
+P:57FC::A button pressed -> Negative Flag
+P:57FE::Skip ahead if Jump (A button) not pressed
+P:5800::\nJump WAS pressed.\n(Also - $37B must be some sort of override)
+P:5808::Can't do heel kick with Trick Timer in progress
+P:580F::Strider facing neither direction?
+P:5811::Carry Set = Facing Right, Carry Clear = Facing Left
+P:5812::+32 Pixels (Strider Facing Left. Check behind-right)
+P:5816::-32 Pixels (Strider Facing Right. Check behind-left)
+P:5818:Heel_Kick_Wall_Check
+P:581F::+/- 32 pixels for collision check
+P:5824::\nCheck for collision +/- 32 pixels (and then +/- 6 pixels)\nbehind Strider for Heel Kick possibiliy. Used for Triangle Jump
+P:5827::Filter for "solid wall"
+P:5831::Limit on Strider XPos
+P:5839:Platforming_Checks
+P:5840:__9840_RTS
+P:5841:Triangle_Jump_Check
+P:5847::Was there a change in Strider's direction?
+P:5849::No? Get out.
+P:584B::\nStart Triangle Jump\n#$30 is irrelevant. Overriden by #$40 in a few lines.
+P:5850::Put change of direction in last action
+P:585E::Override earlier, #$30 Jump Frame set.
+P:5865:Front_Shin_Check
+P:5870:__9870:timer for something, perhaps (DEC somewhere else)
+P:5877::If Jump (A button) wasn't pressed, get out.
+P:587C::Strider at least 48 pixels down the screen?
+P:5883::Down Pressed (Ducking check, probably)
+P:5888::If ducking or $4D0 = something, get out.
+P:58B2:__98B2
+P:58C2:__98C2
+P:58D0::Filter for d-pad presses
+P:58D2::Pressing Down+Right? (Slide Right)
+P:58D6::Pressing Down+Left? (Slide Left)
+P:58E3:Set_Jump_Frame_Counter:\n0 = Normal Jump,\n3 = Triangle Jump (also...)\n3 = Downhill Jump (Momentum >= 12),\n6 = Downhill Jump (Momentum >= 24),\n9 = Trick (Super) Jump
+P:58E6::Set Jump Frame Timer
+P:58E9:Jump_In_Progress
+P:58FF:__98FF
+P:5902::Left or Right pressed?
+P:5904::No? Then skip ahead
+P:5909::Save Last Direction Pressed.
+P:590C:__990C
+P:5912::3 = Planned landing in timer.
+P:591B:__991B
+P:5920::Get offset to lookup jump velocity\nY = Jump type
+P:5924::Y = Calculated Offset from above
+P:5935:__9935
+P:593B:__993B
+P:5948:__9948
+P:594B:__994B_RTS
+P:594C:Get_Jump_Type_Sub:\nUses value in $528 for jump type.\nUsing the Super Jump Trick overrides with value of 9.
+P:5953::Load Jump Type from RAM if not a trick jump
+P:5956:Get_Jump_Type_RTS
+P:5A25::Cap XPos
+P:5A43:__9A43_RTS
+P:5A44:__9A44:Is Strider in Jump Frame Sequence?
+P:5A49::\nJump in progress. Did front toe connect with environment?
+P:5A50::Yes. Erase X Velocity (and more)
+P:5A52:__9A52
+P:5A57::\nApply X Velocity to X Position.
+P:5A75::Branch if Strider moving Left
+P:5A82:__9A82
+P:5A92:__9A92
+P:5AA6:__9AA6
+P:5AB2:__9AB2
+P:5ABD:__9ABD
+P:5ABF:__9ABF
+P:5AC2:__9AC2
+P:5AC5::\nApply Vertical Velocity to Strider's position
+P:5AC8::Save original YPos Frac to Stack
+P:5AD3::Save original YPos Int to Stack
+P:5ADB::Up/Down Check
+P:5AF1:__9AF1
+P:5B0D:__9B0D
+P:5B12:__9B12
+P:5B27:__9B27
+P:5B2B::Clear
+P:5B2E::YVelo
+P:5B99:__9B99
+P:5C77:__9C77
+P:5CC2::Store 7 in $515?
+P:5E1B:Erase_Strider_XVelo_Sub
+P:5E26:__9E26_RTS
+P:6167::Save Off Strider YPos to Stack
+P:6169::Add 8 to it for ground check
+P:6182:__A182
+P:618C::Strider (X+/-16,Y+8)
+P:61A8:__A1A8
+P:61AB::Pull Strider YPos from Stack and put it back in RAM
+P:61D4:__A1D4
+P:61E6:__A1E6
+P:61EC:__A1EC_RTS
+P:61ED:Process_Strider_Wall_Ejection_Sub
+P:61F3::Any downhill momentum = process ejection
+P:61FC::If Camera XPos = 0 (far left), process wall ejection
+P:6201::If Camera XPos >= 6, process wall ejection
+P:6208::Carry Set = Facing Right, Carry Clear = Facing Left
+P:6209::\nPerhaps checking Strider boundaries inside CameraX Scroll Area.\nPerhaps places Camera X position priority higher than Strider\nejection logic. (Move camera first, THEN process ejection?)
+P:620E::+104
+P:6210::Is Strider XPos < 104? Get out
+P:6214:__A214:-104
+P:6218:Strider_Wall_Ejection
+P:6222:Strider_Wall_Ejection_Direction_Check:\nEjection direction can be based on -\n1: Controller input (Left or Right press)\n2: Direction Strider is facing if no controller input.
+P:6223::Moving Left, so eject in the Right Direction.
+P:6227::Moving Right, so eject in the Left Direction.
+P:6229:Strider_Wall_Ejection_4_Pixel_Adjustment
+P:6231:__A231
+P:623E:__A23E
+P:6333:__A333
+P:6346::small sum into $515?
+P:6366:__A366_RTS
+P:6466:__A466_RTS
+P:6511::XPos Offset
+P:6516::YPos Offset
+P:6523::Get Face Left (#$F4?) or Right (#$0C) Lookup Offset value 
+P:6527::XPos Offset
+P:652D::Get Vertical offset lookup value
+P:6549::YPos Offset
+P:654F::XPos Offset
+P:6555:__A555
+P:657D:__A57D
+P:65A1:__A5A1
+P:65AD:__A5AD
+P:79D9::Another 1 into $515
+P:7AB5::Store another 7 into $515?
+P:3820B:Clear_Object_from_200_Block_Sub
+P:38211:__8211_Loop
+P:38238:__8238
+P:382CB:__82CB
+P:382F1:__82F1
+P:3833B:__833B
+P:38389:__8389
+P:3ACC6::\nYou may find yourself here after an entity timer runs out.\nEX: The spawn delay for the Aquaboots
+P:3ACD5:__ACD5
+P:3AD19::<- Hardcoded Value of Mystery
+P:3AD23::<- Hardcoded Value of Mystery
+P:3B2B5::Gravity, I think
+P:3B2C5:__B2C5
+P:3B2ED:__B2ED
+P:3B30B:__B30B
+P:3B30C:Move_Enemy_Sub
+P:3B311:Move_Enemy_Right
+P:3B32C:Move_Enemy_Left
+P:3B358:__B358
+P:3B362:__B362
+P:3B37F:__B37F
+P:3B392:__B392
+P:3B3BE:__B3BE
+P:3B3CB:__B3CB
+P:3B3D5:Move_Enemy_Sub_Exit
+P:3B3D6:Odd_do_Something_pre_Move_Sub
+P:3B45A:__B45A
+P:3B45D:__B45D
+P:3B46B:__B46B
+P:3B470:__B470
+P:3B490:__B490
+P:3B4A2:__B4A2
+P:3B4AE:__B4AE
+P:3B4BC::Subtract Enemy Damage?
+P:3B4C4::Strider dead. No negative health. Zero out.
+P:3B4C9:__B4C9
+P:3B4D3:__B4D3
+P:3B607:__B607_bankE:\nGets picked up after boss is defeated. Centers Strider on the screen.
+P:3B70E::X = Enemy Index Offset
+P:3C00B:Decrement_Entity_Timer_Sub
+P:3C04E:Bank_Switch_to_Entity_via_Accumulator_Sub
+P:3C105:__C105
+P:3C10C:__C10C
+P:3C10F:__C10F
+P:3C12D:Bank_Switch_Sub
+P:3C161:Wait_for_NMI_Loop
+P:3C332:Start_Stop_Read_Controller_Sub
+P:3C33F:Main_Controller_Handler_Sub
+P:3C352:__C352
+P:3C353:Filter_Left_and_Right_Simul_Press:\nLeft and Right should not be pressed at the same time.\nIf that happened, filter them both out before processing.
+P:3C355::Filter out all but L/R button presses
+P:3C357::Were L and R pressed at the same time?
+P:3C359::Branch if No
+P:3C35D::Filter out Left and Right press
+P:3C362:Filter_Left_and_Right_Simul_Press_OK
+P:3C364:Filter_Left_and_Right_Simul_Press_Done
+P:3C368:Get_Controller_Zero_Page_Values_Sub:\nBackup previous Controller Presses to RAM.\nGet current Controller Presses.
+P:3C373::\nCheck for differences
+P:3C379:__C379_Sub:\nCompares previous controller input to current controller input\nDifference is saved in two places per controller.\nGood for "first press" button checks.
+P:3C386:Controller_Read_Handler_Sub
+P:3C389::Read Controller 1
+P:3C38D::Read Controller 2
+P:3C39A:Read_Controller_Sub
+P:3C39E:Read_Controller_Loop
+P:3C3AD:__C3AD_RTS
+P:3C3AE:Read_Controller_Again_Sub
+P:3C3B2:Read_Controller_Again_Loop
+P:3C472:__C472
+P:3C474::Processing Entity?
+P:3C4A0:__C4A0
+P:3C4B6:__C4B6_RTS
+P:3C62F::<- Hardcoded Value
+P:3C6FC::<- Hardcoded Value
+P:3C828:__C828_Loop
+P:3C834:__C834
+P:3C8E9:Check_Env_Collision_Sub
+P:3C9C2:__C9C2_Loop
+P:3C9CF:__C9CF
+P:3D958::From DEC5 Sub. Level tile?
+P:3D95A::Tile in front of Strider, maybe??
+P:3DEC5:DEC5_Sub:\nThis might be environmental collision detection\nAppears to be used by enemies and Strider
+P:3DEC8::... bank switch to appropriate level data bank??
+P:3DEE6:__DEE6
+P:3DF07:__DF07
+P:3DF0A:__DF0A
+P:3DF11:__DF11
+P:3DF1B::Level tile data at location?
+P:3DF2A:__DF2A
+P:3DF2D:Env_Collision_Check_for_Strider:\nPointer F1/F2 == $500 means Strider
+P:3DF3C:__DF3C
+P:3DF52:__DF52
+P:3DF5D:__DF5D
+P:3DF6C:__DF6C
+P:3DF7E:__DF7E
+P:3DF81:__DF81
+P:3DF85::Save original Env Target XPos
+P:3DF86::+6
+P:3DF88::Carry Set = Facing Right, Carry Clear = Facing Left
+P:3DF8A::-6
+P:3DF8C:__DF8C
+P:3DF96:__DF96
+P:3DF9D:__DF9D
+P:3DFAB:__DFAB
+P:3DFB8:__DFB8
+P:3DFBB::\nSub above retrieves.. perhaps level tile from a lookup using X/Y position offsets.\nReturned in A. Use for env collision detection?\n$D952 below gets a pointer to an address using value from DEC5 Sub
+P:3DFD2::Get level tile information.
+P:3DFD6::Init $02 to 0 and...
+P:3DFD8::Shift top two bits of tile info into $02
+P:3DFDF::Add to same level tile information.
+P:3E007:__E007
+P:3E009::\nPointer created above is in $00/$01.\n$02/Y = Offset from shifted bits and addition\nperhaps more tile info.
+P:3E00B::... and use as offset
+P:3E00E::What on earth is in the $600 block of RAM?
+P:3E012::Starting Offset
+P:3E019::Inc Offset
+P:3E01A:__E01A:tri-jump related?
+P:3E020::\nThis might be the most important part of env collision detection.
+P:3E029:__E029
+P:3E042:__E042
+P:3E057:__E057_RTS
+P:3E943:__E943:Bank Switch to 01 ($5E RAM = $F9)
+P:3E947:Set_F1F2_Block_to_200_Sub:\nWord at F1 appears to direct game to block to use.\nI assume: $200 means enemies/objects, $500 means Strider
+P:3E99D:__E99D
+P:3E9C7::Get Entity ROM Bank Value
+P:3EB8E:__EB8E
+P:3EB96:__EB96
+P:3EBA6:__EBA6
+P:3EBBC:__EBBC
+P:3EBD2:__EBD2
+P:3EBD5:__EBD5
+P:3EBD8:__EBD8
+P:3ECFD:__ECFD
+P:3EE8C:Set_Strider_Direction_Sub
+P:3EE96:__EE96
+P:3EEB7:__EEB7_RTS
+P:3EEE3:__EEE3
+P:3EF90:__EF90
+P:3EFA1:__EFA1
+P:3EFD4:__EFD4_Sub
+P:3EFE2:__EFE2
+P:3EFE5:__EFE5
+P:3F013:Create_OAM_in_RAM_Begin:\nWord at $F1 = Pointer to Strider/Enemy data in RAM\nWord at $F4 = Pointer to Temp OAM destination in RAM\nWord at $07 = Raw Sprite data reference (X/Y Offsets, default attributes, Tile)
+P:3F015::Init Sprites Created Counter = 0
+P:3F017:Create_OAM_in_RAM_Loop:Increment Sprites Created Counter
+P:3F019::Offset to Entity Sprite Set
+P:3F01A:Create_OAM_in_RAM_Get_Sprite_YOffset:\nOrigin YPos is the bottom of the character\nSprites are built by subtracting offset from this.\ni.e. Strider head sprites are:\nOrigin YPos - 40 pixels (8 pixels * 5 sprites tall)
+P:3F01C::Lookup value >= 254 means hide sprite
+P:3F020::Set Sprite YPos = 240 to hide Sprite
+P:3F025:Create_OAM_in_RAM_YPos_Setup
+P:3F027::Base addr + #$0B = Origin YPos in RAM
+P:3F02A::Origin YPos minus offset to get Sprite's YPos
+P:3F02C:Create_OAM_in_RAM_YPos
+P:3F02E::Write Sprite YPos to Temp OAM
+P:3F033:Create_OAM_in_RAM_Get_Sprite_XOffset:Get X Offset to use for this tile
+P:3F03B:Create_OAM_in_RAM_XPos_Setup:Base addr + #$08 = Origin XPos in RAM
+P:3F03E::Origin XPos +/- offset to get Sprite's XPos
+P:3F043:Create_OAM_in_RAM_XPos
+P:3F045::Write Sprite XPos to Temp OAM
+P:3F04A:Create_OAM_in_RAM_Get_Sprite_Attributes:Get Default Attributes
+P:3F04C::Set Sprite priority, is palette cycling for damage, etc.
+P:3F051:Create_OAM_in_RAM_Attributes
+P:3F053::Write Sprite Attributes to Temp OAM
+P:3F058:Create_OAM_in_RAM_Get_Sprite_TileID:Get Tile ID for Sprite
+P:3F05C::Write Sprite Tile ID to Temp OAM
+P:3F061::Bump Temp OAM Ram Pointer to next set of Sprites
+P:3F065::Increment Sprite Byte Counter
+P:3F069::Maximum Sprites (64) reached?
+P:3F06D::Decrement Sprite Counter
+P:3F071:Create_OAM_in_RAM_Done
+P:3F085:Get_Sprite_Attributes_Sub:Offset to Character Attributes in RAM
+P:3F087::Clear the Sprite Background priority bit from the lookup
+P:3F08A::Combine default tile attributes with character status (RAM)
+P:3F4D6::Another Flag (Hit by Projectile?)
+P:3FB43:__FB43
+P:3FB57:__FB57
+P:3FB63:__FB63
+P:3FC06:__FC06_sub
+G:2000:PpuControl_2000:7  bit  0\n---- ----\nVPHB SINN\n|||| ||||\n|||| ||++- Base nametable address\n|||| ||    (0 = $2000; 1 = $2400; 2 = $2800; 3 = $2C00)\n|||| |+--- VRAM address increment per CPU read/write of PPUDATA\n|||| |     (0: add 1, going across; 1: add 32, going down)\n|||| +---- Sprite pattern table address for 8x8 sprites\n||||       (0: $0000; 1: $1000; ignored in 8x16 mode)\n|||+------ Background pattern table address (0: $0000; 1: $1000)\n||+------- Sprite size (0: 8x8; 1: 8x16)\n|+-------- PPU master/slave select\n|          (0: read backdrop from EXT pins; 1: output color on EXT pins)\n+--------- Generate an NMI at the start of the\n           vertical blanking interval (0: off; 1: on)
+G:2001:PpuMask_2001:7  bit  0\n---- ----\nBGRs bMmG\n|||| ||||\n|||| |||+- Display type: (0: color, 1: grayscale)\n|||| ||+-- 1: Show background in leftmost 8 pixels of screen, 0: Hide\n|||| |+--- 1: Show sprites in leftmost 8 pixels of screen, 0: Hide\n|||| +---- 1: Show background\n|||+------ 1: Show sprites\n||+------- Emphasize red\n|+-------- Emphasize green\n+--------- Emphasize blue
+G:2002:PpuStatus_2002:7  bit  0\n---- ----\nVSO. ....\n|||| ||||\n|||+-++++- Least significant bits previously written into a PPU register\n|||        (due to register not being updated for this address)\n||+------- Sprite overflow. The intent was for this flag to be set\n||         whenever more than eight sprites appear on a scanline, but a\n||         hardware bug causes the actual behavior to be more complicated\n||         and generate false positives as well as false negatives; see\n||         PPU sprite evaluation. This flag is set during sprite\n||         evaluation and cleared at dot 1 (the second dot) of the\n||         pre-render line.\n|+-------- Sprite 0 Hit.  Set when a nonzero pixel of sprite 0 overlaps\n|          a nonzero background pixel; cleared at dot 1 of the pre-render\n|          line.  Used for raster timing.\n+--------- Vertical blank has started (0: not in vblank; 1: in vblank).\n           Set at dot 1 of line 241 (the line *after* the post-render\n           line, false); cleared after reading $2002 and at dot 1 of the\n           pre-render line.
+G:2003:OamAddr_2003:Set OAM address - Write only
+G:2004:OamData_2004:Read/Write OAM data
+G:2005:PpuScroll_2005:Set PPU scroll, write twice - Write only
+G:2006:PpuAddr_2006:Set PPU address, write twice - Write only
+G:2007:PpuData_2007:Read/Write VRAM
+G:4000:Sq0Duty_4000:DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:4001:Sq0Sweep_4001:EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)
+G:4002:Sq0Timer_4002:TTTT TTTT\nTimer low (T)
+G:4003:Sq0Length_4003:LLLL LTTT\nLength counter load (L), timer high (T)
+G:4004:Sq1Duty_4004:DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:4005:Sq1Sweep_4005:EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)
+G:4006:Sq1Timer_4006:TTTT TTTT\nTimer low (T)
+G:4007:Sq1Length_4007:LLLL LTTT\nLength counter load (L), timer high (T)
+G:4008:TrgLinear_4008:CRRR RRRR\nLength counter halt / linear counter control (C), linear counter load (R)
+G:400A:TrgTimer_400A:TTTT TTTT\nTimer low (T)
+G:400B:TrgLength_400B:LLLL LTTT\nLength counter load (L), timer high (T)
+G:400C:NoiseVolume_400C:--LC VVVV\nEnvelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:400E:NoisePeriod_400E:L--- PPPP\nLoop noise (L), noise period (P)
+G:400F:NoiseLength_400F:LLLL L---\nLength counter load (L)
+G:4010:DmcFreq_4010:IL-- RRRR\nIRQ enable (I), loop (L), frequency (R)
+G:4011:DmcCounter_4011:-DDD DDDD\nLoad counter (D)
+G:4012:DmcAddress_4012:AAAA AAAA\nSample address (A)
+G:4013:DmcLength_4013:LLLL LLLL\nSample length (L)
+G:4014:SpriteDma_4014:Writing $XX will upload 256 bytes of data from CPU page $XX00-$XXFF to the internal PPU OAM.
+G:4015:ApuStatus_4015:Read:\nIF-D NT21\nDMC interrupt (I), frame interrupt (F), DMC active (D), length counter > 0 (N/T/2/1)\n\nWrite:\n---D NT21\nEnable DMC (D), noise (N), triangle (T), and pulse channels (2/1)
+G:4016:Ctrl1_4016:Read (NES - input):\n---4 3210\nRead data from controller port #1.\n\nWrite:\n---- ---A\nOutput data (strobe) to both controllers.
+G:4017:Ctrl2_FrameCtr_4017:Read (NES - input):\n---4 3210\nRead data from controller port #2.\n\nWrite (Frame counter): MI-- ----\nMode (M, 0 = 4-step, 1 = 5-step), IRQ inhibit flag (I)
