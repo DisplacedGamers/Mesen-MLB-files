@@ -1,0 +1,153 @@
+﻿R:003A:RYU_XPOS
+R:0042:Wind_Timer
+R:004B:Breadcrumb_Bookmark
+R:0066:Wind_Order_66
+R:007E:Current_Room
+R:00A2:Wind_Pointer_Block_Low_Byte
+R:0100:Breadcrumb_X_Start
+R:0140:Breadcrumb_Y_Start
+R:0180:Breadcrumb_Status_Start
+R:0538:RYU_X_VELOCITY_FRAC
+R:0550:RYU_SCREEN_XPOS
+R:0551:FrontClone_XPOS
+R:0552:BackClone_XPOS
+R:0580:Ryu_YPOS
+R:0581:FrontClone_YPOS
+R:0582:BackClone_YPOS
+R:0598:horiSpeedFracInc
+R:05B0:horiSpeedInt
+R:05C8:vertSpeedFrac
+R:05E0:vertSpeedInt
+P:927D::Graphics sequence/Ryu state change.
+P:9281::First frame of next sequence?
+P:9289::New pointer for graphics (low byte)
+P:928E::New pointer for graphics (high byte)
+P:92A5::Set pointer locations for graphics ID (low byte)
+P:92AA::Set pointer locations for graphics ID (high byte)
+P:92AC::Current offset in graphics ID sequence
+P:92AF::Adjust pointer low byte location appropriately
+P:92B1::Graphics sequence ended. Get next byte for next step
+P:92B5::Initialize pointer's offset to 0
+P:92B9::Save number of frames for latest graphics ID
+P:92BF::Save latest graphics ID
+P:92C4::Store latest offset in graphics ID sequence
+P:92C8::Graphics sequence ended. Get next byte for next step
+P:92C9::Next byte loaded into accumulator...
+P:94D5::Pull next appropriate palette from sequence
+P:94E5::At least used for looping lightning BG palette
+P:94EA::Write current palette to 1C0 row place
+P:94EE::Decrement X and loop back to alter all appropriate locations
+P:9BED::No movement? Skip ahead.
+P:9BEF::Next Breadcrumb offset -> Y
+P:9BF2::Position 00 to 80 gets Ryu to center. Then screen scrolls...
+P:9BF5::.. Ryu stays centered, and this value tracks X-Position
+P:9BF7::Store X Breadcrumb
+P:9BFD::Store Y Breadcrumb
+P:9C00::Ryu on: 00 - Air, 10 - Ground, 50 - Left Wall, 03 - Right Wall
+P:9C07::Direction Left/Right, Recovery flashing
+P:9C0E::Save Status
+P:9C11::Increment Breadcrumb Bookmark
+P:9C13::Allow 6 bits for offset. Will reset on roll to 7th.
+P:9C15::Store new breadcrumb bookmark location
+P:9C17::Breadcrumb back to Y
+P:9C18::Back clone position goes first. X = 2
+P:9C1A::Clone positional subroutine (back) (A = New Breadc)
+P:9C1D::Front clone breadcrumb offset processing subroutine
+P:9C20::Clone positional subroutine (front) (A = New Breadc + 32)
+P:9CF7::Write Clone's Y Position
+P:9D0D::Get close clone breadcrumb offset
+P:9D0F::Add 20 to breadcrumb location to get clone offset
+P:9D11::Handle overflow
+P:9D13::Store clone offset in Y
+P:9D14::X holds clone number
+P:1C067::No X-Axis action.
+P:1C08C::No X-Axis action? Hop back
+P:1C08E::Default Walking Left Velocity
+P:1C0A6::Default Walking Right Velocity
+P:1C0CE::Check if X Velocity is negative
+P:1C153::Alternate starting velocity/fraction
+P:1C159::Default Starting Vertical jump speed Value (Fraction)
+P:1C15B::Default Starting Vertical jump speed Value (Integer)
+P:1C15D::Save Vertical Starting Jump speed (Fraction)
+P:1C160::Save Vertical Starting Jump speed (Integer)
+P:1C16F:Environmental_Push_Subroutine:Get wind order
+P:1C172::Bit shift left and -> X
+P:1C17D::$4E and $4F point to destination
+P:1C180:Wind_Instruction_Addresses
+P:1C1A2:Treadmill_Application
+P:1C1B2:Apply_No_Push_To_Ryu
+P:1C1BB:Apply_Left_Push_To_Ryu
+P:1C1C6:Apply_Right_Push_To_Ryu
+P:1C23D:Wind_Order_1_Start:Init 4 sec. Timer
+P:1C242:Wind_Order_2:Left Wind Timer
+P:1C249:Wind_Order_3:Init 4 sec. Timer
+P:1C24E:Wind_Order_4:Windless Timer
+P:1C255:Wind_Order_5:Init 4 sec. Timer
+P:1C25A:Wind_Order_6:Right Wind Timer
+P:1C261:Wind_Order_7:Init 4 sec. Timer
+P:1C266:Wind_Order_8:Windless Timer
+P:1C26D:Wind_Order_9:Init 2 sec. Timer
+P:1C272:Wind_Order_10:Right Wind Timer
+P:1C279:Wind_Order_11:Init 2 sec. Timer
+P:1C27E:Wind_Order_12:Left Wind Timer
+P:1C285:Wind_Order_13:Init 3 sec. Timer
+P:1C28A:Wind_Order_14:Right Wind Timer
+P:1C291:Wind_Order_15:Init 4 sec. Timer
+P:1C296:Wind_Order_16:Windless Timer
+P:1C29D:Begin_Wind:Start wind pattern
+P:1C2A2:Next_Timer_and_Wind_Order:Write the timer
+P:1C2A4:Next_Wind_Order:Increment Wind Order $66
+P:1D01F::Init Wind_Order to 0
+P:1D03B::If 5 <= Room < 9, add Wind
+P:1D03F::(Skip wind if Room < 5)
+P:1D043::(Skip wind if Room >= 9)
+P:1D045::Initialize Wind Order to 15
+P:1D7A9::Terminal Velocity Check (Max Downward Velocity: 7)
+P:1D7AB::If max, skip past gravity/acceleration
+P:1D7AE::Load Vertical Speed (Fraction)
+P:1D7B1::Add $37 to Vertical Speed (Fraction)
+P:1D7B3::Save Vertical Speed (Fraction)
+P:1D7B6::Load Vertical Speed (Integer)
+P:1D7B9::Add Carry from Fraction Overflow (if appl)
+P:1D7BB::Save Vertical Speed (Integer)
+P:1D7C8::Load Ryu Y Position
+P:1D7CB::Add Y Difference (FF = Minus 1. Going Up)
+P:1D7D2::Did Ryu fall into a pit?
+P:1D7D6::Force Ryu Y-Position to bottom of screen
+P:1D7DB::Pit death flag value of $80
+P:1D7DD::Write it to BE
+P:1D8CA::Start jump sequence... I think
+P:1DAB0::Add X-Axis velocity increment to X-Axis velocity fraction
+P:1DABB::Add X-Axis Velocity Int + Carry to Ryu X-Position
+P:1DABE::Minimum X-Position check
+P:1DAC2::Maximum X-Position check
+G:2000:PpuControl_2000:7  bit  0\n---- ----\nVPHB SINN\n|||| ||||\n|||| ||++- Base nametable address\n|||| ||    (0 = $2000; 1 = $2400; 2 = $2800; 3 = $2C00)\n|||| |+--- VRAM address increment per CPU read/write of PPUDATA\n|||| |     (0: add 1, going across; 1: add 32, going down)\n|||| +---- Sprite pattern table address for 8x8 sprites\n||||       (0: $0000; 1: $1000; ignored in 8x16 mode)\n|||+------ Background pattern table address (0: $0000; 1: $1000)\n||+------- Sprite size (0: 8x8; 1: 8x16)\n|+-------- PPU master/slave select\n|          (0: read backdrop from EXT pins; 1: output color on EXT pins)\n+--------- Generate an NMI at the start of the\n           vertical blanking interval (0: off; 1: on)
+G:2001:PpuMask_2001:7  bit  0\n---- ----\nBGRs bMmG\n|||| ||||\n|||| |||+- Display type: (0: color, 1: grayscale)\n|||| ||+-- 1: Show background in leftmost 8 pixels of screen, 0: Hide\n|||| |+--- 1: Show sprites in leftmost 8 pixels of screen, 0: Hide\n|||| +---- 1: Show background\n|||+------ 1: Show sprites\n||+------- Emphasize red\n|+-------- Emphasize green\n+--------- Emphasize blue
+G:2002:PpuStatus_2002:7  bit  0\n---- ----\nVSO. ....\n|||| ||||\n|||+-++++- Least significant bits previously written into a PPU register\n|||        (due to register not being updated for this address)\n||+------- Sprite overflow. The intent was for this flag to be set\n||         whenever more than eight sprites appear on a scanline, but a\n||         hardware bug causes the actual behavior to be more complicated\n||         and generate false positives as well as false negatives; see\n||         PPU sprite evaluation. This flag is set during sprite\n||         evaluation and cleared at dot 1 (the second dot) of the\n||         pre-render line.\n|+-------- Sprite 0 Hit.  Set when a nonzero pixel of sprite 0 overlaps\n|          a nonzero background pixel; cleared at dot 1 of the pre-render\n|          line.  Used for raster timing.\n+--------- Vertical blank has started (0: not in vblank; 1: in vblank).\n           Set at dot 1 of line 241 (the line *after* the post-render\n           line, false); cleared after reading $2002 and at dot 1 of the\n           pre-render line.
+G:2003:OamAddr_2003:Set OAM address - Write only
+G:2004:OamData_2004:Read/Write OAM data
+G:2005:PpuScroll_2005:Set PPU scroll, write twice - Write only
+G:2006:PpuAddr_2006:Set PPU address, write twice - Write only
+G:2007:PpuData_2007:Read/Write VRAM
+G:4000:Sq0Duty_4000:DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:4001:Sq0Sweep_4001:EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)
+G:4002:Sq0Timer_4002:TTTT TTTT\nTimer low (T)
+G:4003:Sq0Length_4003:LLLL LTTT\nLength counter load (L), timer high (T)
+G:4004:Sq1Duty_4004:DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:4005:Sq1Sweep_4005:EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)
+G:4006:Sq1Timer_4006:TTTT TTTT\nTimer low (T)
+G:4007:Sq1Length_4007:LLLL LTTT\nLength counter load (L), timer high (T)
+G:4008:TrgLinear_4008:CRRR RRRR\nLength counter halt / linear counter control (C), linear counter load (R)
+G:400A:TrgTimer_400A:TTTT TTTT\nTimer low (T)
+G:400B:TrgLength_400B:LLLL LTTT\nLength counter load (L), timer high (T)
+G:400C:NoiseVolume_400C:--LC VVVV\nEnvelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:400E:NoisePeriod_400E:L--- PPPP\nLoop noise (L), noise period (P)
+G:400F:NoiseLength_400F:LLLL L---\nLength counter load (L)
+G:4010:DmcFreq_4010:IL-- RRRR\nIRQ enable (I), loop (L), frequency (R)
+G:4011:DmcCounter_4011:-DDD DDDD\nLoad counter (D)
+G:4012:DmcAddress_4012:AAAA AAAA\nSample address (A)
+G:4013:DmcLength_4013:LLLL LLLL\nSample length (L)
+G:4014:SpriteDma_4014:Writing $XX will upload 256 bytes of data from CPU page $XX00-$XXFF to the internal PPU OAM.
+G:4015:ApuStatus_4015:Read:\nIF-D NT21\nDMC interrupt (I), frame interrupt (F), DMC active (D), length counter > 0 (N/T/2/1)\n\nWrite:\n---D NT21\nEnable DMC (D), noise (N), triangle (T), and pulse channels (2/1)
+G:4016:Ctrl1_4016:Read (NES - input):\n---4 3210\nRead data from controller port #1.\n\nWrite:\n---- ---A\nOutput data (strobe) to both controllers.
+G:4017:Ctrl2_FrameCtr_4017:Read (NES - input):\n---4 3210\nRead data from controller port #2.\n\nWrite (Frame counter): MI-- ----\nMode (M, 0 = 4-step, 1 = 5-step), IRQ inhibit flag (I)
