@@ -1,0 +1,194 @@
+﻿R:0014:Current_Area_14:Current area * 8 (Area 2 = $10)
+R:0015:Pause_Flag_15
+R:0045:t_Projectile_Damage_45
+R:0046:t_Object_ID_46
+R:0047:t_Object_Direction_47
+R:0048:t_Object_XPos_Low_48
+R:0049:t_Object_XPos_High_49
+R:004A:t_Object_YPos_Low_4A
+R:004B:t_Object_YPos_High_4B
+R:004C:t_Object_XVelocity_4C
+R:004D:t_Object_YVelocity_4D
+R:004E:t_Object_Block_Location_4E
+R:0051:t_Transition_Index_51
+R:0053:t_Object_Health_53
+R:007F:Projectile1_XPos_7F
+R:0080:Projectile1_YPos_80
+R:0081:Projectile1_Damage_81
+R:0082:Projectile2_XPos_82
+R:0083:Projectile2_YPos_83
+R:0084:Projectile2_Damage_84
+R:0085:Projectile3_XPos_85
+R:0086:Projectile3_YPos_86
+R:0087:Projectile3_Damage_87
+R:0088:Projectile4_XPos_88
+R:0089:Projectile4_YPos_89
+R:008A:Projectile4_Damage_8A
+R:008B:Projectile5_XPos_8B
+R:008C:Projectile5_YPos_8C
+R:008D:Projectile5_Damage_8D
+R:0092:Hover_Gauge_92
+R:0099:Special_Item_Abilities_99
+R:00C3:Gun_Gauge_C3
+R:00F2:Pad1_New_Input_F2
+R:00F7:Pad1_Current_Input_F7
+R:0400:Player_ID_400
+R:0401:Object_Direction_401
+R:0402:Object_XPos_Low_402
+R:0403:Object_XPos_High_403
+R:0404:Object_YPos_Low_404
+R:0405:Object_YPos_High_405
+R:0406:Object_XVelocity_406
+R:0407:Object_YVelocity_407
+R:0408:Object_Block_Location_408
+R:040D:Object_Health_40D
+R:047D:Enemy_Health_47D
+R:06F0:Homing_Missiles_6F0
+R:06F1:Lightening_Blast_6F1
+R:06F2:Three_Way_Missiles_6F2
+P:10C38:Player_Movement_Overhead_8C38_Paused_Sub
+P:10C3B:Player_Movement_Overhead_8C3B_Sub
+P:112AC:Player_Projectiles_Overhead_Paused_92AC
+P:112AF:Player_Projectiles_Overhead_92AF
+P:11B64:Boss2_Movement_9B64_Paused_Sub
+P:11B67:Boss2_Movement_9B67_Sub
+P:11BEE::\n$40/$41 are the width/height used for collision detection call
+P:11BF8::Used for Player Damage Processing, perhaps
+P:11C01::\n$40/$41 are the width/height used for collision detection call
+P:11C13::Used for Enemy Damage processing, perhaps
+P:11C19:Bail_From_Sub1
+P:11E1A:Boss2_Projectiles_Paused_9E1A_Sub
+P:11E1D:Boss2_Projectiles_9E1D_Sub
+P:12589:Boss1_Enemy_Movement_Paused_A589_JMP
+P:1258C:Boss1_Enemy_Movement_A58C_JMP
+P:12616::Boss 1 JSR
+P:1815F:On_Foot_or_Swimming_Overworld_815F_Sub
+P:18AED:Horizontal_to_Vertical_Start_Sub
+P:18AF0::Initialize Rotation animation frame to 0
+P:18AF4::\n$09 = Rotating to Vertical
+P:18AFB:Movement_Horizontal_to_Vertical_8AFB_JMP:\nSave hardcoded value of 3A to $45 (parameter?)\nPerhaps Transition Related?
+P:18AFF::\nChange pointer in $7A/$7B to point to look-up table below
+P:18B2B:Vertical_to_Horizontal_Start_Sub
+P:18B30::Initialize Rotation animation frame to 0
+P:18B32::Rotating to Horizontal
+P:18B39:Movement_Vertical_to_Horizontal_8B39_JMP
+P:18BE5:Process_Tank_Rotation_Orientation
+P:18BE7::End of rotation around tile?
+P:18BEB::Load X Velocity based on a pointer
+P:18BF4::Load Y Velocity based on a pointer
+P:18C00:Process_Tank_Rotation_Complete
+P:18C12::\nChange object ID for tank to indicate side of tile\n$05 = Right side\n$07 = Left side
+P:18C18::\nGet Final X and Y Velocity after rotation is complete
+P:18E32:Player_Input_and_Tank_Movement_Updates_Sub
+P:18E49::Filter left and right dpad press
+P:18E4B::Pressing Right?
+P:18E4F::Pressing Left?
+P:18E8A:Call_Speed_Limit_Sub
+P:18E9A:Movement_Hanging_8E9A_JMP
+P:18EAE::Wall.1 and Wall.2 Check
+P:1900C:Movement_Right_Side_of_Tile_900C_JMP
+P:19014::\nSub gets Tile attributes and saves a value ($00 or $80)\nBased on something.\n$96C2 Sub saves tile info-flag in $98
+P:1901A::\nHardcode XPosition low to 80 hex.\nTank moving vertically. X should not change.
+P:1901E::\nCheck Tank speed limit on Y-Axis because tank is\ntravelling up/down
+P:1905B::Edge Check ("Left")
+P:1905F::Edge Check ("Right")
+P:19063::Player pressing Right on DPad?
+P:19067::This seems important...
+P:1906A::Starting YPos (low)
+P:1906C::Next Tile Offset = Down one line and left one tile
+P:1907B:Get_Next_Tile_Call:\nNext tile check (travelling up/down?)
+P:1907E::\nReturns: $00, $80\nSneaky! We have values on the stack
+P:19171:Movement_Left_Side_of_Tile_9171_JMP
+P:192DE:Movement_Normal_92DE_JMP
+P:19389::\nIf tile attributes are negative (Highest attribute set),\nCheck wall movement
+P:1938E:Check_Wall_Abilities_1:\nCheck special abilities for Wall.1 or Wall.2\nPerhaps BMI above is a test to see if ledge reached?
+P:19392::Does Tank have Wall.1 or Wall.2 ability?
+P:19394::Yes? Skip ahead.
+P:19396::No. So jump to continue movement (fall off ledge)
+P:19399:Has_Wall_Abilities
+P:1939B::Pressing Left or Right?
+P:1939E::\n$48 holds X-Pos (Low byte)\nThe #$40 and #$C0 checks are used to see if tank is approaching\nthe edge of a current block
+P:193A0::Reached Left Edge
+P:193A4::Reached Right Edge
+P:193AB:Process_Right_Edge_Movement:Right pressed on D-pad?
+P:193AF::Nope. Continue.
+P:193B7::Next Tile Parameter (#$12) = Moving Right a tile
+P:193BB:Process_Left_Edge_Movement:Left pressed on D-pad?
+P:193C7::Next Tile Parameter (#$10) = Moving Left a tile
+P:193C9:Call_Get_Next_Tile_Down
+P:193E2:Check_Wall_Climb
+P:193E4::Pressing Left or Right?
+P:193E7::Check XPos Low byte
+P:193F1:Check_Left_Wall_Climb
+P:193F5::Player is pressing Left @ Left Wall
+P:193F9::Set parameter (-1) for next tile Sub
+P:193FD:Check_Right_Wall_Climb
+P:19405::Set parameter (+1) for next tile Sub
+P:19407:Call_Get_Next_Tile_Up
+P:1940A::Determine if tile can be climbed?
+P:19416::\nGoing Up Wall
+P:19432:Continue_Movement
+P:1C093:Enemy_Damage_Hop
+P:1C8DF:Copy_Object_Values_to_Zero_Page_Sub
+P:1C928:Save_Object_Values_to_400s_Sub
+P:1C97E::Copy Tank info to zero page
+P:1C9C1::\nSubroutine gets where to go next
+P:1C9C8::\nIf Game is not paused, add three to destination address
+P:1C9D3:Hydra:\n8127 - Collision Detection (Overworld)\n8AF4 - Collision Detection (Overhead)\n\n815F - Player Movement Overworld\n\n8C38 - Skip Player Movement Overhead\n8C3B - Player Movement Overhead\n\nA589 - Skip Damage Checks (Overhead)\nA58C - Damage Checks (Overhead)\n\nTank Movement:\n92DE - Normal\n8AFB - Horizontal to Vertical Rotation\n8B39 - Vertical to Horizontal Rotation\n900C - Right side of Tile\n9171 - Left side of Tile\n8E9A - Under Tile\n\n8CB3 - Swimming tank
+P:1D238::$C0 or higher tile is definitely climbable
+P:1D240::Next tile is climbable 
+P:1D243::Next tile is NOT climbable 
+P:1D2B1:Get_Tile_Attributes_Sub
+P:1D2B2::\nTake offset passed to function (in Accumulator) and \nadd it to current tile to get next tile attributes
+P:1D2B5::Load tile attributes into A
+P:1D2DE:Apply_X_Velo_Sub
+P:1D2FE:Apply_Y_Velo_Sub
+P:1D697:Enemy_Damage_Check_Sub
+P:1D6AB:Save_enemy_health
+P:1D6C0:__skip_ahead
+P:1D6CD:Collision_Detection_Sub
+P:1D6CF::Player/Enemy XPos
+P:1D6D2::Horizontal Hitbox Range
+P:1D6DB::Player/Enemy YPos
+P:1D6E5::Vertical Hitbox Range
+P:1D6E9:Collision_Detection_Loop_Start:\nLoop all objects to see if any are within range
+P:1D6EB::\nIf Projectile ID is negative or zero, skip collision detection
+P:1D6F6::X-Axis Collision Detection
+P:1D6FC:Collision_Detection_YAxis
+P:1D701::Y-Axis Collision Detection
+P:1D707:Collision_Detection_Continue:\nDecrement X three times to move to next projectile
+P:1D710:Collision_Detection_Exit
+P:1D763:Call_Enemy_Damage_Sub
+P:1D770:Call_Damage_to_Player_Maybe_Sub
+P:1EB14:Speed_Limit_Sub
+P:1EF2B:Position_Processing_Sub
+G:2000:PpuControl_2000:7  bit  0\n---- ----\nVPHB SINN\n|||| ||||\n|||| ||++- Base nametable address\n|||| ||    (0 = $2000; 1 = $2400; 2 = $2800; 3 = $2C00)\n|||| |+--- VRAM address increment per CPU read/write of PPUDATA\n|||| |     (0: add 1, going across; 1: add 32, going down)\n|||| +---- Sprite pattern table address for 8x8 sprites\n||||       (0: $0000; 1: $1000; ignored in 8x16 mode)\n|||+------ Background pattern table address (0: $0000; 1: $1000)\n||+------- Sprite size (0: 8x8; 1: 8x16)\n|+-------- PPU master/slave select\n|          (0: read backdrop from EXT pins; 1: output color on EXT pins)\n+--------- Generate an NMI at the start of the\n           vertical blanking interval (0: off; 1: on)
+G:2001:PpuMask_2001:7  bit  0\n---- ----\nBGRs bMmG\n|||| ||||\n|||| |||+- Display type: (0: color, 1: grayscale)\n|||| ||+-- 1: Show background in leftmost 8 pixels of screen, 0: Hide\n|||| |+--- 1: Show sprites in leftmost 8 pixels of screen, 0: Hide\n|||| +---- 1: Show background\n|||+------ 1: Show sprites\n||+------- Emphasize red\n|+-------- Emphasize green\n+--------- Emphasize blue
+G:2002:PpuStatus_2002:7  bit  0\n---- ----\nVSO. ....\n|||| ||||\n|||+-++++- Least significant bits previously written into a PPU register\n|||        (due to register not being updated for this address)\n||+------- Sprite overflow. The intent was for this flag to be set\n||         whenever more than eight sprites appear on a scanline, but a\n||         hardware bug causes the actual behavior to be more complicated\n||         and generate false positives as well as false negatives; see\n||         PPU sprite evaluation. This flag is set during sprite\n||         evaluation and cleared at dot 1 (the second dot) of the\n||         pre-render line.\n|+-------- Sprite 0 Hit.  Set when a nonzero pixel of sprite 0 overlaps\n|          a nonzero background pixel; cleared at dot 1 of the pre-render\n|          line.  Used for raster timing.\n+--------- Vertical blank has started (0: not in vblank; 1: in vblank).\n           Set at dot 1 of line 241 (the line *after* the post-render\n           line, false); cleared after reading $2002 and at dot 1 of the\n           pre-render line.
+G:2003:OamAddr_2003:Set OAM address - Write only
+G:2004:OamData_2004:Read/Write OAM data
+G:2005:PpuScroll_2005:Set PPU scroll, write twice - Write only
+G:2006:PpuAddr_2006:Set PPU address, write twice - Write only
+G:2007:PpuData_2007:Read/Write VRAM
+G:4000:Sq0Duty_4000:DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:4001:Sq0Sweep_4001:EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)
+G:4002:Sq0Timer_4002:TTTT TTTT\nTimer low (T)
+G:4003:Sq0Length_4003:LLLL LTTT\nLength counter load (L), timer high (T)
+G:4004:Sq1Duty_4004:DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:4005:Sq1Sweep_4005:EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)
+G:4006:Sq1Timer_4006:TTTT TTTT\nTimer low (T)
+G:4007:Sq1Length_4007:LLLL LTTT\nLength counter load (L), timer high (T)
+G:4008:TrgLinear_4008:CRRR RRRR\nLength counter halt / linear counter control (C), linear counter load (R)
+G:400A:TrgTimer_400A:TTTT TTTT\nTimer low (T)
+G:400B:TrgLength_400B:LLLL LTTT\nLength counter load (L), timer high (T)
+G:400C:NoiseVolume_400C:--LC VVVV\nEnvelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:400E:NoisePeriod_400E:L--- PPPP\nLoop noise (L), noise period (P)
+G:400F:NoiseLength_400F:LLLL L---\nLength counter load (L)
+G:4010:DmcFreq_4010:IL-- RRRR\nIRQ enable (I), loop (L), frequency (R)
+G:4011:DmcCounter_4011:-DDD DDDD\nLoad counter (D)
+G:4012:DmcAddress_4012:AAAA AAAA\nSample address (A)
+G:4013:DmcLength_4013:LLLL LLLL\nSample length (L)
+G:4014:SpriteDma_4014:Writing $XX will upload 256 bytes of data from CPU page $XX00-$XXFF to the internal PPU OAM.
+G:4015:ApuStatus_4015:Read:\nIF-D NT21\nDMC interrupt (I), frame interrupt (F), DMC active (D), length counter > 0 (N/T/2/1)\n\nWrite:\n---D NT21\nEnable DMC (D), noise (N), triangle (T), and pulse channels (2/1)
+G:4016:Ctrl1_4016:Read (NES - input):\n---4 3210\nRead data from controller port #1.\n\nWrite:\n---- ---A\nOutput data (strobe) to both controllers.
+G:4017:Ctrl2_FrameCtr_4017:Read (NES - input):\n---4 3210\nRead data from controller port #2.\n\nWrite (Frame counter): MI-- ----\nMode (M, 0 = 4-step, 1 = 5-step), IRQ inhibit flag (I)
