@@ -1,0 +1,724 @@
+﻿R:0000:Fight_Init_0:1 = Fight Started
+R:0001:Opponent_ID_1:(Range: 0-99)
+R:0002:FightBank_2:The memory bank containing the data for the current fight
+R:0003:FightOffset_3:Offset of the current fight within its memory bank
+R:0004:Fight_Init_4:FF = In Fight\n01 = Between Rounds or Cutscene
+R:0005:KnockdownSts_05:0 = Not knocked down\n1 = Knocked down
+R:0006:Current_Round_6:Changing does affect Opponent\nSeems to only be for opening round sequence
+R:0008:Fight_ID_8:Don1=48\nHippo=35\nSode=28\nVon&Tyson=32\nHonda2 and Glass = 0
+R:0009:Fighter_ID_9:Von=49\nPH=48\nDon2=35\nGlass=50
+R:000A:MacLosses_A
+R:000D:CurrPRGBank_0D:The current PRG bank mapped to $8000-$9FFF
+R:000E:SavedPRGBank_E:The last PRG bank to be loaded
+R:0010:PPU0Load_10:Value to load next into PPU control register 0
+R:0011:PPU1Load_11
+R:0013:Screen_Redraw_Offset_13
+R:0016:Init_Mac_Draw_OnScreen_16:1 = Draw Mac\n0 = No Mac
+R:0017:Init_Opponent_Draw_onScreen_17
+R:0018:RNG_18:Updates once per frame
+R:0019:Button_ID_19:which button(s) is currently pressed
+R:001B:SprtBkgUpdt_1B:MSB set=update sprite/background enable/disable.\n#$80=Disable sprites and background.\n#$81=Enable sprites and background.
+R:001C:Init_Fight_Start_Sequence_1C:0 = In Fight\n1 = Not in Fight
+R:001D:GameStatus_1D:Enables/disables portions of the game.\n\n#$00 - Main game engine running.\n#$01 - Run game timers.\n#$02 - Stop all game processing.\n#$03 - Process only audio.\n#$FF - Run non-playable portions of game\n(intro, cut scenes, etc).
+R:001E:Counter_1E
+R:001F:TransTimer_1F:Countdown timer for various transitions.
+R:0030:Opp_Phase_Processing_Flag_30:Sets fighting pattern for opponent at start of fight
+R:0031:OppCurrentPhase_LB_31
+R:0032:OppCurrentPhase_HB_32
+R:0033:OppCurrentOther_33
+R:0038:Opp_Fight_Pattern_Processing_Flag_38
+R:0039:OppFightPatternTimer_39:Next action happens when timer reaches zero
+R:003A:OppActionNextIndex_3A:Offset for Opponent Action Table
+R:003B:OppActionBasePtrLB_3B:Base pointer to opponent's action table, lower byte.
+R:003C:OppActionBasePtrHB_3C:Base pointer to opponent's action table, high byte.
+R:0046:SpecialCrowdGraphics_46
+R:004A:ComboTimer_4A:Frames left until another punch must be landed to keep combo alive.
+R:004B:ComboCountDown_4B:Hits left in current combo.
+R:0050:MacCurState_50:Status of Little Mac during a fight. MSB set=status update
+R:0051:_MacStateStatus_51
+R:0052:MacStateTimer_52
+R:0053:MacStateIndex_53
+R:0054:MacStBasePtrLB_54
+R:0055:MacStBasePtrHB_55
+R:0061:MacBaseAnimIndex_A1
+R:0074:MacPunchType_74:Little Mac punch type.\n#$00 = Right punch to face.\n#$01 = Left punch to face.\n#$02 = Right punch to stomach.\n#$03 = Left punch to stomach.\n#$80 = Super punch.
+R:0075:MacPunchDamage_75:The amount of damage Little Mac's puch will do to opponent
+R:0076:MacDefense1_76:#$FF=Dodge\n#$08=Block\n#$80=Duck
+R:0077:MacDefense2_77:Little Mac's defense\n#$FF=Dodge\n#$08=Block\n#$80=Duck.
+R:0090:OppCurState_90:Opponent's current state. Set MSB=initialize new state.
+R:0091:OppStateStatus_91:Status of opponent's current state
+R:0092:OppStateTimer_92:Timer for opponents current state.
+R:0093:OppStateIndex_93:Index to opponent current state data
+R:0094:OppStBasePtrLB_94:Base pointer to opponent's current state data, lower byte.
+R:0095:OppStBasePtrUB_95:Base pointer to opponent's current state data, upper byte.
+R:0096:OppStRepeatCntr_96:Counter used to repeat the opponent's current state
+R:0097:OppPunching_97:0 = Not Punching\n1 = Punching
+R:0098:OppPunchSts_98:$00     ;No opponent punch being thrown.\n$01     ;Punch blocked by Little Mac.\n$02     ;Punch is ducked by Little Mac.\n$03     ;Punch hit Little Mac.\n$04     ;Punch dodged by Little Mac.\n$80     ;Punch active
+R:009A:OppAnimSeg_9A:Number of timed segments in opponent's current animation
+R:009B:OppAnimSegTimer_9B:Number of frames per segment in Opponent's animation
+R:009C:OppOutlineTimer_9C:Timer for dodge indicator outline color.\nMSB set = Set timer
+R:009D:OppIndexReturn_9D:Restore value of OppStateIndex after function return
+R:009E:OppPtrReturnLB_9E:Restore value of OppStBasePtrLB after function return
+R:009F:OppPtrReturnUB_9F:Restore value of OppStBasePtrUB after function return
+R:00A0:OppAnimFlags_A0:MSB set = Change opponent sprites\nLSB set = Move opponent on screen.
+R:00A1:OppBaseAnimIndex_A1:Base animation index for opponent sprites
+R:00A2:__OppSpritesMirrored_Flag_A2
+R:00B0:OppBaseSprite_X_B0:Base X position for opponent sprites
+R:00B1:OppBaseSprite_Y_B1:Base Y position for opponent sprites
+R:00B4:OppPunchSide_B4:0 = Punching Mac's Left Side\n1 = Punching Mac's Right Side
+R:00B5:OppPunchDamage_B5:The amount of damage the current punch will do to Little Mac.
+R:00B6:OppHitDefenseUR_B6:Amount to subtract from Little Mac right punch to face damage.
+R:00B7:OppHitDefenseUL_B7:Amount to subtract from Little Mac left punch to face damage
+R:00B8:OppHitDefenseLR_B8:Amount to subtract from Little Mac right punch to stomach damage
+R:00B9:OppHitDefenseLL_B9:Amount to subtract from Little Mac left punch to stomach damage
+R:00BB:GameStatus_BB:Various game statuses.\n#$00=No action.\n#$01=Referee moving on screen.\n#$02=Opponent throwing right hook.\n#$03=Opponent getting up.\n#$04=Opponent walking to Little Mac after knowck down.\n#$80=Little Mac falling down.\n#$FD=Freeze fight.\n#$FF=Opponent victory dance.
+R:00BC:MacCanPunch_BC:#$00=Little Mac can't punch\n#$01=Little Mac can punch.
+R:00BD:OppLastPunchSts_BD:Last punch status of opponent\n\n$00     ;No opponent punch being thrown.\n$01     ;Punch blocked by Little Mac.\n$02     ;Punch is ducked by Little Mac.\n$03     ;Punch hit Little Mac.\n$04     ;Punch dodged by Little Mac.\n$80     ;Punch is initialized.
+R:00D0:Joy1Buttons_D0
+R:00D1:Joy2Buttons_D1
+R:00D2:Button1Status_D2:Base for controller 1 button statuses
+R:00D3:DPad1History_D3
+R:00D5:A1History_D5
+R:00D6:B1Status_D6
+R:00D7:B1History_D7
+R:00D9:Strt1History_D9
+R:00E0:GenByte_E0:General Purpose Byte
+R:00E1:GenByte_E1:General Purpose Byte
+R:00E2:GenByte_E2:General Purpose Byte
+R:00EE:IndJumpPtr_EE:Pointer for indirect jump
+R:00EF:IndJumpPtr_HB_EF
+R:00F0:SoundInitBase_F0
+R:00F2:MusicInit_F2:The music index to be started
+R:0300:RoundTmrStart_300:Round timer started:\n0=Not started\n1=Started\nMSB=needs reset
+R:0301:RoundTmrCntrl_301:Round timer control\n0=running\n1=halt\n2=flash clock
+R:0302:Clock_Minutes_302
+R:0304:Clock_Seconds_Tens_304
+R:0305:Clock_Seconds_Ones_305
+R:0306:RoundTimerUB_306:Underlying timer behind round clock, upper byte
+R:0307:RoundTimerLB_307:Underlying timer behind round clock, lower byte
+R:030A:ClockDispStatus_30A:Whether the clock display requires an update\nMSB=needs update
+R:030D:Enemy_Timer_Tens
+R:030E:Enemy_Timer_Ones
+R:0311:OppActionTimer_311
+R:0321:NewHeartsUD_321
+R:0322:NewHeartsLD_322
+R:0323:Hearts_10s_Place_323
+R:0324:Hearts_1s_Place_324
+R:0325:HeartDispStatus_325
+R:0326:HeartDisplayUD_326
+R:0327:HeartDisplayLD_327
+R:0342:Star_Punches_342
+R:0343:IncStars_343:#$01=Increment number of stars\n#$80=Something
+R:0347:StarCountDown_347:Must count down to 1 before stars will be given.
+R:0390:healthpoints_390
+R:0391:MacNextHP_391
+R:0392:MacCurrentHP_392
+R:0393:MacDisplayedHP_393
+R:0398:OppHP_398:Base for HP opponent HP addresses
+R:0399:OppCurrentHP_399:Current value of opponents HP
+R:039A:OppDisplayedHP_39A:Displayed value of opponent's HP
+R:03D2:LastPunchSts_3D2:Who made the last punch?\n#$81=Mac\n#$82=Opp
+R:03D9:SelectRefill_3D9:Amount of HP refill Mac will receive from pushing select
+R:03E0:PointsStatus_3E0
+R:03E1:PointsNew_3E1
+R:03E8:PointsTotal_3E8
+R:0480:ThisBkgPalette_480:Through $048F. Current background palette data.
+R:0481:ThisBkgPaletteB_481
+R:0482:ThisBkgPaletteC_482
+R:0483:ThisBkgPaletteD_483
+R:0484:ThisBkgPaletteE_484
+R:0485:ThisBkgPaletteF_485
+R:048D:ThisBkgPaletteN_48D
+R:048E:ThisBkgPaletteO_48E
+R:04A0:UpdatePalFlag_4A0:Non-zero value indicates the palettes need to be updated
+R:04FD:OpponentVulnerableTimer_4FD:Opponent is vunerable while counting down. Does not count on combos.
+R:04FF:__04FF_Opponent_Guard_04FF
+R:0581:VariableStateTime_581:A variable time for states. Usually decreases after being punched.
+R:0585:SpecialTimerValue_585
+R:05B8:OpponentReactTimer_5B8:Opponents reaction time. Does not count on combos.
+R:05C5:ComboDamage_5C5:Damage from Mac Punch during a Combo
+R:05D7:OppHPBoostCap_5D7:Soft cap for HP boosts
+R:06A0:Controller_Reads_6A0
+P:E000:Jump_Update_Stars_Logic_Sub
+P:E003:Jump_Update_Hearts_Logic_Sub
+P:E006:Jump_Update_Health_Bars_Logic_Sub
+P:E009:Jump_Round_Timer_Control_Sub
+P:E00C:Jump_Roll_Up_Points_Logic_Sub
+P:E00F:Jump_Check_Crowd_Special_Case
+P:E015:Punch_Analyzer_Sub
+P:E05D:Punch_Analyzer_Logic
+P:E066:__8066
+P:E069:__8069
+P:E06F:__806F
+P:E079::Was Mac Ducking?
+P:E07D::Was Mac Dodging?
+P:E090:__8090
+P:E09C:__809C
+P:E09E:__809E
+P:E0B3:__80B3
+P:E0BA:__80BA
+P:E0E8:Punch_Dealt_so_Clear_Numbers
+P:E0EF:__80EF
+P:E0F8:Knockdown_Boxer
+P:E0FF:__80FF
+P:E10C::Filter everything but star punch
+P:E118:__8118
+P:E11C::\nOpponent hit Little Mac (Assign value of 3)
+P:E12C::Flag set of some sort
+P:E131:__8131
+P:E140:__8140
+P:E143::Parameter for update hearts sub
+P:E14A::Set $341 High (Flag, perhaps)
+P:E155::Opponent threw last punch (#$82)
+P:E15A::Opponent gains health from landing punch
+P:E166::Return: 0 = Knocked Down, 1 = Still Standing
+P:E16B:Boxer_Still_Standing_after_Punch
+P:E16E:Knockdown_Little_Mac_Zero_Health
+P:E176:__8176
+P:E1B2:__81B2
+P:E1C1:__81C1
+P:E1C4:__81C4
+P:E259:__8259
+P:E288:__8288
+P:E297:__8297b
+P:E2B7::Was Opponent Defense = Mac Punch Power?
+P:E2B9::Was Opponent Defense > Mac Punch Power?
+P:E2BB::Save Mac Punch Damage
+P:E2CB:__82CB:Save Opponent Punch Damage
+P:E312:__8312
+P:E319:Process_Mac_Punch:3 = Punch Hit Opponent?
+P:E31B::Little Mac Punch Status, Perhaps?
+P:E31F::Mac made the last punch = #$81
+P:E32D:__832D
+P:E345:__8345
+P:E352:__8352
+P:E35D:__835D
+P:E366:__8366
+P:E373:__8373
+P:E382:__8382
+P:E3EB:Set_Knockdown_Flags_Sub
+P:E3F3::#$80 = Little Mac Falling Down
+P:E3F5::Halt Timer
+P:E421:Toggle_Round_Timer_Sub
+P:E43E:Update_Hearts_Sub
+P:E49F:Update_Mac_Status_Sub
+P:E4AC:__84AC
+P:E4FF:Deal_Damage_to_Opponent_Sub
+P:E503:Deal_Damage_to_Mac_Sub
+P:E505:Deal_Damage_Logic
+P:E50E::Health = 0 means knocked down
+P:E510::If Health is positive, boxer is standing.
+P:E512:Knocked_Down
+P:E517::00 = No health and Return 0 (Knocked Down)
+P:E519::Zero out health
+P:E51D:Deal_Damage_Set_Health_to_Zero
+P:E51F:Deal_Damage_Update_Health_Standing:Update Health
+P:E522::Return 1 (Still standing)
+P:E52B:Boost_Opponent_HP_Sub
+P:E530:__8530
+P:E53F:Boost_HP_Sub_RTS
+P:E540:Erase_Attack_Defense_Sub
+P:E544:Erase_Attack_Defense_Loop:Zero Mac's defense (he got hit)
+P:E546::Zero Opponent's Attack (Attack already delivered)
+P:E54B::Stomach Damage?
+P:E550::Status set for... punch processed for both Mac and Opponent?
+P:E69D:Find_RNG
+P:E6A9:__86A9
+P:E6D0:Roll_Up_Points_Logic:Flag of some sort
+P:E6DA::Point Status = Zero means get out
+P:E6DF:__86DF
+P:E6EB:__86EB
+P:E6F5:__86F5
+P:E700:__8700
+P:E71E:__871E_RTS
+P:E71F:__871F
+P:E721:__8721
+P:E725:__8725
+P:E755:__8755
+P:E758:__8758_RTS
+P:E759:Round_Timer_Control_Logic
+P:E75C::Zero means round hasn't started yet. Get out
+P:E75E::MSB means it needs a reset
+P:E780:__8780
+P:E7D6:__87D6
+P:E806:__8806
+P:E81D:__881D_RTS
+P:E81E:Update_Health_Bars_Logic:A flag, perhaps.
+P:E830:__8830
+P:E851:__8851
+P:E853:__8853
+P:E85E:__885E
+P:E883:__8883
+P:E892:__8892
+P:E8FC:__88FC
+P:E90D:Update_Hearts_Logic
+P:E92C:__892C
+P:E94A:Update_Hearts_Logic_RTS
+P:E94B:__894B
+P:E94F:__894F
+P:E961:__8961
+P:E974:Update_Stars_Logic:Flag, perhaps
+P:E99E:__899E
+P:E9BD:__89BD
+P:E9BE:__89BE
+P:E9DE:__89DE
+P:EA2A:Crowd_Special_Case:Loop 5 values
+P:EA2C:__8A2C_Loop
+P:EA35::Loop 3 values
+P:EA40:__8A40:If still activating special crowd graphics, it loads the same stuff.\nIf special case is done, loads a different set of "done" graphics.
+P:EA4B:__8A4B
+P:EA6F:Check_Crowd_Special_Case:First Criteria check
+P:EA75::Not Zero means special case?
+P:EA77::Do something special to the crowd
+P:EA8D:__8A8D
+P:EAA2:__8AA2
+P:EAD2:__8AD2
+P:EADC:__8ADC_RTS
+P:16003:__8003_Unknown_Sub
+P:16006:__8006_Unknown_Sub
+P:16009:__8009_Unknown_Sub
+P:16073:__8073
+P:16119:__8119_Unknown_Logic
+P:16121:__8121
+P:16134:__8134
+P:16148:__8148
+P:16160:__8160
+P:16164:__8164
+P:1617E:__817E
+P:16180:__8180
+P:16182:__8182
+P:16186:__8186_RTS
+P:16187:__8187
+P:16280:__8280_Unknown_Logic
+P:16297:__8297
+P:162CB:__82CB_RTS
+P:162CC:__82CC
+P:162EC:__82EC
+P:16319:__8319_Unknown_Logic
+P:16325:__8325:$0x = __8363\n$80 = __8347\n$EA: ??
+P:16358:__8358
+P:16362:__8362_RTS
+P:16363:__8363:($0x)
+P:1636A:__836A
+P:1636E:__836E
+P:16371:__8371
+P:1637F:__837F
+P:1638B:__838B:($39)
+P:16394:__8394
+P:16399:__8399
+P:163A7:__8347:($80)
+P:163F4:__83F4:($E3 - compare address to value from Mac State Table)
+P:1640D:__840D
+P:16412:__8412
+P:16459:__8459:($E5)
+P:1645B::$99 must be a flag
+P:16460::Load and save punch type
+P:16462::Update State Index
+P:164AF:__84AF:from ($EA)
+P:164CD:__84CD
+P:164DC:__84DC
+P:16510:__8510:($F0)
+P:1651D:__851D_B
+P:1651F:__851F_B
+P:16522:__8522
+P:1652C:__852C
+P:1654D:__854D:($F2)
+P:1654F::Flip the highest bit
+P:1655D:__855D
+P:16562:__8562
+P:16574:Set_Mac_Punch_Damage:($F6)
+P:16579:__8579
+P:16580:__8580
+P:165A8:__85A8:($FC)
+P:165AB::Default X to #$14
+P:165B1:__85B1:Mac can't punch. Set X = #$8F
+P:165B3:__85B3
+P:165B9::Signal Palette update
+P:165C1:__85C1:($FD)
+P:165CA:__85CA:($FF)
+P:1660F:Jump_Handler_Mac_Sub
+P:1A0B5:__A0B5
+P:1A0BC:__A0BC_Loop
+P:1A0D0:__A0D0
+P:1A2A4:__A2A4
+P:1A5D7::CHR ROM $FE/0000 bank select ($C000-$CFFF)
+P:1A5E7::CHR ROM $FE/1000 bank select ($E000-$EFFF)
+P:1A68D:__A68D
+P:1A693::PPU Related - Wait for Sprite 0?
+P:1A699::Opponent Action Work (Flags? Timers? Investigate.)
+P:1A69C::Opponent State Work (Investigate)
+P:1A69F::Opponent Vulnerable/React
+P:1A6A8::Opponent Handler
+P:1A6AE::Opponent Animation Work
+P:1A6B1::Not sure.
+P:1A6B7::A few special graphics things, perhaps?
+P:1A6BA::Check for punch thrown, do damage, etc.?
+P:1A6C3::Some Opponent Outline stuff here
+P:1A760:__A760
+P:1A78A:__A78A_Loop
+P:1A79A:__A79A
+P:1A79D:__A79D
+P:1A7A5:__A7A5_RTS
+P:1A7C4:__A7C4_RTS
+P:1A829::Initialize Stack Pointer
+P:1A837:__A837
+P:1A83D:__A83D
+P:1A83F:__A83F
+P:1A8CE:__A8CE
+P:1A8E0::Lots of fight init stuff here
+P:1A8E3::Set Fight to #$FF (fight in progress)
+P:1A8E9::#$00 = In Fight
+P:1A8EB::#$00 = Main Game Engine Running
+P:1A8ED:__A8ED
+P:1A909:__A909
+P:1A90B:__A90B_Loop
+P:1AA0C:__AA0C
+P:1AA1D:Set_Between_Rounds_No_Fight_and_Cutscene_Sub
+P:1AA29:__AA29
+P:1AA3C:Bank_Switch_to_07_Sub
+P:1AA40:Bank_Switch_to_08_Sub
+P:1AA44:Bank_Switch_to_0B_Sub
+P:1AA48:Bank_Switch_to_Current_Fight_Sub
+P:1AA4A:Bank_Switch
+P:1AA54:Set_Current_and_Last_PRG_Bank_to_7_Sub
+P:1AA66:Save_PRG_Bank_Logic
+P:1AB18:__AB18
+P:1AB58:____AB58_Sub
+P:1ABB3::Initialize Enemy Action Timer to 192 ($C0)
+P:1ABB8::Initialize a ton of stuff to zero
+P:1ABCF::Set Opponent Fight Pattern Timer to #$FF ("reset?")
+P:1ABD3::to #$81
+P:1ABD6::to #$80
+P:1ABDA::to #$01
+P:1ABE3::Zero out Mac and Opponent HP
+P:1ABF1:Build_Health_Bars_Loop:Initialize Health for Mac and Opponent
+P:1ABF4::Build health bar graphics, I think
+P:1AC1D:__AC1D
+P:1AC8C:__AC8C
+P:1AE54:__AE54
+P:1AE5F:Select_Pressed_Health_Boost_Sub
+P:1AE70:__AE70
+P:1AE7F:__AE7F
+P:1AEAB:Do_Some_Rng_Sub:\nResults of function = Carry Clear or Set (True/False) for RNG\n$EF = Input parameter A\n#$F = RNG Check
+P:1AEB5::Parameter = #$0F? Get out.
+P:1AEBC::Filter to get right nibble
+P:1AEC2::Compare original parameter to right nibble
+P:1AEC6::If they are equal, clear Carry.
+P:1AEC7:Do_Some_Rng_RTS
+P:1AED4:Jump_Handler_Sub:Temporary save of next Action ID (Y -> $4C9)
+P:1AED7::Multiply destination offset index by 2.
+P:1AED8::Destination Offset to Y
+P:1AED9::\nPull calling address from stack and save to EE/EF
+P:1AEDF::\nUse sub call address (contained in $EE/$EF) + calculated offset (Y)\nto determine next destination
+P:1AEE2::Save low byte for destination
+P:1AEE6::Set high byte for destination
+P:1AEE9::Set low byte for destination
+P:1AEEB::Restore Next Action ID to Y
+P:1AEEE::\nThis jump location is determined from the address pushed to the stack\nfrom the routine that called this Sub + an offset provided via the accumulator.
+P:1AEF1:ROR_RNG_3X_Sub
+P:1AEF8:Erase_Values_Sub
+P:1AEFA:Erase_Values_Loop
+P:1AF02:Transition_Timer_Sub
+P:1AF04:____AF04_Sub
+P:1AF06:Infinite_Loop:\nLoop and continue to load timer until NMI toggle. RTS after change
+P:1AF12:__AF12_Loop
+P:1AF5B:__Fight_Boxer_Init_Palette_Something_Sub
+P:1AF5E::E0/E1 to base address for fight? Fight offset for boxer?
+P:1AFBD:Write_Controller1_History_Sub
+P:1AFF9:__AFF9_Loop
+P:1B000:__B000_RTS
+P:1B001:Save_Controller_History_Sub
+P:1B013:__B013_RTS
+P:1B014:__B014
+P:1B018:__B018
+P:1B01D:__B01D
+P:1B021:__B021_Sub
+P:1B024:__B024_Loop
+P:1B033:__B033_RTS
+P:1B034:Write_Controller2_History_Sub
+P:1B049:__B049_Sub
+P:1B05B:__B05B_RTS
+P:1B05C:__B05C
+P:1B065:__B065
+P:1B069:Fight_Phase_Processing_Sub
+P:1B071::\nGet next value from phase table\nValues above #$D0 are used for writing values to RAM.\nThe Action Timer for the Round starts at #$C0 and counts down.\nTherefore, values LESS than #$C0 indicate when the current action\n(i.e. punching with a given punch type) will expire.
+P:1B075::\nExpiration Time reached? Change behavior
+P:1B078::No? Get out.
+P:1B07A:Get_Next_Behavior
+P:1B07D:__B07D
+P:1B084::Byte after expired timer saved here means...?
+P:1B088:__B088
+P:1B0A0:__B0A0_Loop
+P:1B0AA:__B0AA:Get "Next Operation" for opponent itinerary.
+P:1B0AF::\nUpdate itinerary address in RAM by adding offset to it
+P:1B0BB:__B0BB
+P:1B0C7:Fight_Phase_Processing_RTS
+P:1B0C8:__B0C8_Setup
+P:1B0CA::Next
+P:1B0CB::Starting offset for $500 block writes
+P:1B0CE::Next
+P:1B0CF::How many values to write in the $500 block
+P:1B0D3::Next
+P:1B0D4::Which "Current Other" we are using
+P:1B0D6::\nLast byte of currently loaded block is index start for Gen Bytes below.
+P:1B0DA::Destination provided by Current Other (1 or 2)
+P:1B0E0::\nStart loop for filling in $500 blocks
+P:1B0E2:Update_500_Block_Load_Loop
+P:1B0E7::Y = Next source location for value to write to $500 loc
+P:1B0E8::X = Next $500 location to write
+P:1B0E9::How many values remain to write to $500 block
+P:1B0ED::Restore "Current Other" to Y
+P:1B0F1:Write_Byte_to_500:Write one byte to $500 block
+P:1B0F5:Write_Word_to_500:Write two bytes (word) to $500 block
+P:1B0F7:Setup_500_Write_Loop:Save Loop Counter Value
+P:1B0F9::Load RAM offset for $500 block
+P:1B0FD:Write_500_Loop:Load Value to write to RAM $500 block
+P:1B100::Write loaded value to $500+Offset in RAM
+P:1B124:__B124_RTS
+P:1B125:__B125
+P:1B12B:__B12B
+P:1B12F:__B12F
+P:1B133:__B133
+P:1B137:__B137
+P:1B139:__B139
+P:1B185:__B185_Loop
+P:1B196:Opponent_Pattern_Processing_Sub
+P:1B19A::\nOpponent Current State/Action.\n1 = Idling\n> 1 = Action Assigned
+P:1B19C::(If X=0, get out)
+P:1B19F::\nAction is in-progress, so decrement pattern timer
+P:1B1A1::If Action hasn't expired, get out
+P:1B1A3::\nTimer expired for current Opponent Action. Set to 1.
+P:1B1A5:Opponent_Load_Next_Pattern
+P:1B1A7::\n$3B = ROM Offset (Word) for Current Opponent's action list\nY = Next Action ID Offset
+P:1B1AB::X = Right Nibble for next action (New Action Timer Value)
+P:1B1AE::Move the Opponent's standby Action to the next Index.
+P:1B1B8::\n0 = Setup Punch\n1 = RNG for Punch
+P:1B1C1:Setup_Punch
+P:1B1C5:Setup_Punch_Load_Punch_Type:Load Punch (or action?)
+P:1B1C7::\nPunch type stored in Opponent Current State\nGlass Joe: $95 = Hook, $96 = Jab, $99 = Taunt\nVon: $95 = Hook, $96 = Jab\nHonda1: $95 = Hook, $96 = Jab, $97 = Uppercut, $9B = Stutter step\n     $98 = Left flutter punch, $99 = Backup and wind-up,\n     $9A = Right Flutter punch\nMacho: $95 = Left hook,\n       $97 = Left Uppercut, $98 = Right Uppercut\n       $99 = Spin Punch, $9A = Super Spin Punch\nHippo: $97 = Shake and punch (left side),\n       $98 = Shake and punch (right side)\n       $99 = Mouth open\nTyson: $97 = Super Uppercut (Left Side),\n       $9D = Super Uppercut (Right Side)
+P:1B1CD:Opponent_Pattern_Processing_RTS
+P:1B1CE:Opponent_Action_RNG:RNG Subroutine uses parameter as percentage chance. #$F = No Chance.\nReturns "Yes" (Carry Clear) or "No" (Carry Set)\nIf No, use current table value (@ Y) as new table index (Good for looping)\nIf Yes, use NEXT value (@ Y+1) to load new Phase, then process it.
+P:1B1D2::Carry = Returned value from RNG Change Sub
+P:1B1D4::\nCurrent table value is New Index.
+P:1B1D7:Opponent_Action_RNG_Save_Index
+P:1B1DC:Opponent_Action_RNG_Inc_Index:\nMove to next Table Index
+P:1B1DF:__B1DF
+P:1B1F4:__B1F4
+P:1B1FD::#$1 Means RNG determines next Pattern Timer value
+P:1B203:Load_Next_Pattern_Timer_B
+P:1B205:Inc_Pat_Index_and_Save_Fight_Pattern_Timer
+P:1B208:Save_Fight_Pattern_Timer
+P:1B20B:Load_Next_Pattern_Timer_A
+P:1B210:Pattern_Timer_A_or_B_RNG_Roll
+P:1B21A:__B21A
+P:1B21E:__B21E
+P:1B23C:__B23C
+P:1B250:__B250
+P:1B267:__B267
+P:1B450:__B450_RTS
+P:1B451:__B451
+P:1B454:__B454
+P:1B46F:__B46F
+P:1B489:__B489
+P:1B4DC:__B4DC
+P:1B4E4:__B4E4
+P:1B52F:__B52F_RTS
+P:1B549:__The_Big_B549
+P:1B559:__B559
+P:1B575:__B575
+P:1B580:__B580_RTS
+P:1B581:__B581
+P:1B586:__B586
+P:1B62D::Set Mac and Opponent State to #$C0
+P:1B633::Set Mac and Opponent State Status to #$81
+P:1B63B::#$01 means Fight Started
+P:1BF7E:____BF7E_Sub
+P:1BF99:Get_Left_Nibble_Sub
+P:1C041:__C041_PPU_Stuff_Sub
+P:1C05F:__C05F
+P:1C078:__C078_RTS
+P:1C251:__C251
+P:1C254:__C254
+P:1C260:__C260_Loop
+P:1C274:__C274
+P:1C27B:__C27B
+P:1C2CF:__C2CF
+P:1C2E5:__C2E5
+P:1C2F7:__C2F7
+P:1C2F9:__C2F9
+P:1C318:__C318_RTS
+P:1C3D9:CED9_RTS_Sub
+P:1C44E:__C44E
+P:1C45B:__C45B_Loop
+P:1C46A:__C46A_RTS
+P:1C46B:__C46B:Filter out high bit (remove state change?)
+P:1C46D::and save Opponent Current State
+P:1C471::Set high bit on Opponent's current status
+P:1C475::Start at RAM address $92...
+P:1C477::And set value to zero for 9 addresses
+P:1C47C::Start at RAM address B4...
+P:1C47E::And set value to zero for 6 addresses
+P:1C484::Opponent Outline to 1
+P:1C491::0 = Glass Joe
+P:1C49A::\n8AEF = Joe Punch base address-ish (ignore)
+P:1C4A6:__C4A6
+P:1C4B3:__C4B3
+P:1C4B6::90FD = Joe First value (before fight)\n8BC2 = Joe Jab\n8C4D = Joe Hook
+P:1C4E4:__C4E4
+P:1C4E7:Opponent_Handler_Base_Sub
+P:1C4F8:__C4F8
+P:1C4FA:__C4FA
+P:1C52A:__C52A
+P:1C535:__C535
+P:1C53E:__C53E
+P:1C54F:__C54F_RTS
+P:1C550:Handle_Opponent_State_Logic:0x = Set State Timer, X = Next State Timer. Next byte is Animation Base Index.\n1x = Set State Timer, X = Next State Timer. Next byte is Animation Base Index.\n        Next two bytes = Opponent Base Sprite XY Change\n2x = Set State Timer, X = Next State Timer. \n        Next two bytes = Opponent Base Sprite XY Change\n3x = Roll RNG. x = Check Value\n4x = Mirror Opponent Sprites (With New Sprites) X = State Timer\n5x = Mirror Opponent Sprites (No New Sprites) X = State Timer\n6x = Set State Timer, Move Opponent XY, Set Animation Flag\n7x = Set State Timer, Animation Seg & Timer,\n        Opponent XY, and  Opponent Animation Flag\n        x = (Split byte = State/AnimTimers and Anim Segment Count)\n80 = Set Opponent State Timer (to next byte)\n9x = Update array of values in RAM (x = how many values to update)\n     Next twos bytes are the pointer to RAM starting address\n     Each byte that follows x number of times = value to write\nAx = Set Opponent State Timer (X) and Move Opponent XY to destination\n     Example: Opponent gets up from a knockdown\nEx = Use Right Nibble (x)\n   E0 = Change State Table Location (Temp)\n           (Next two bytes in State tbl = new state tbl address)\n   E1 = Restore Previous State Table\n   E4 = Copy Variable State Timer to Opp State Timer\n   E5 = Clear Opponent Punching Flag\n   E6 = PPULoad0 clear bit 5 (xx0x xxxx)\n   E7 = PPULoad0 set bit 5 (xx1x xxxx)\n   E8 = Word Value Check from State Table\n   E9 = Round Timer Toggles (Next Byte: On/Off/Halt)\n   EC = Sound Engine Loader (next Byte has value and offset)\nFX = Use Right Nibble (X)\n   F0 = Opponent Punch Status Check\n   F1 = Change State Table Location (Temp)\n           (Next three bytes in State tbl = new state tbl address + Index)\n   F2 = Zero Page Value Check (Next byte = Address, byte after = value)\n   F3 = Decrement Repeat Counter $96\n   F4 = Set Opponent Current State = #$81\n   F5 = Set Repeat Counter $96 (Use next State Value)\n   F6 = Set Opponent Punch Side and Damage (Next 2 bytes)\n   F7 = Setup Opponent Defense (4 Quadrants - Next 4 Bytes)\n   F8 = Increment Mac Index twice and Set State Timer = 1\n   F9 = Start Opponent Action (Set flag=1)\n   FA = Write to Address/Value from State Table (next 2 bytes)\n   FB = Save Special Timer Value $585 into Combo Timer\n   FC = Combo Timer Check\n   FE = Set Opponent State Status to #$82\n   FF = Decrement Opponent State Index and Set Opp. State Status to #$83
+P:1C558::Save right nibble to X
+P:1C582:Check_Opponent_Next_State:\nGet next State Table Byte.\nIf byte is not zero, state processing is done for now.\nIf byte IS zero, process next state byte.
+P:1C58C:Check_Opponent_Next_State_RTS
+P:1C58D:Set_State_Timer_and_Animation_Index:Right nibble of most recent State Table value
+P:1C595::Set Animation Flag = change opponent sprites
+P:1C597::Next State Index
+P:1C599::Will always branch so long as previous index != #$FF
+P:1C59B:Set_State_Timer_and_Animation_Index_with_New_Sprites:Right nibble of most recent State Table value
+P:1C5A4::#$80 = Change Opponent Sprites
+P:1C5A6:Set_Opponent_XY_Location
+P:1C5B3:Set_State_Timer_and_Change_Opp_Base_XY:\n2x branch
+P:1C5B7:Roll_RNG_Call:Right Nibble to A
+P:1C5B8::Returns Carry Set or Clear
+P:1C5BB::\nCarry Clear means skip to next byte in state table and process
+P:1C5BD::\nCarry Set means current byte in State Table is the new State Index
+P:1C5C0:Save_Index_and_Process_Next_State
+P:1C5C5:__Rng_Func_Carry_was_Clear_C5C5
+P:1C5C8:Mirror_Opponent_Sprites_With_New_Sprites:Set Opponent's sprites as mirrored
+P:1C5CE:Mirror_Opponent_Sprites_No_New_Sprites
+P:1C5D4:Set_State_Timer_and_Move_Opponent_X_and_Y:From earlier right nibble
+P:1C5D6:Move_Opponent_XY_and_Set_Animation_Flag:Get Opponent's Next X and Y Location offsets
+P:1C5D8::Next Opponent State
+P:1C5DA::Offset for Opponent X Location
+P:1C5DC::Add to Opponent's X and Y
+P:1C5E1::Opponent Animation Flag = 1
+P:1C5E6:Set_State_Timer_AnimSegAndTimer_OppXY_OppAnim_Flag:Use Right Nibble from State byte
+P:1C5E7::Get lowest two bits
+P:1C5EA::Add 1
+P:1C5EC::Use for State Timer
+P:1C5EE::as well as Animation Segment Timer.
+P:1C5F0::Use Right Nibble from State byte again
+P:1C5F1::Shift right twice because...
+P:1C5F2::... upper 6 bits of value contain animation segment count
+P:1C5F4::New animation segment count + 1
+P:1C5F5::Save it!
+P:1C5F9:Opponent_Set_State_Timer:Load Next Timer value from ROM
+P:1C5FB::Next Opponent State Index
+P:1C5FD::Set Opponent Timer for this State (?)
+P:1C600:Write_State_Table_Based_Values_to_RAM:\nLoop Counter = $E0 (Right Nibble)\nBase RAM Destination Pointer = $E2/$E1 (Next two state table bytes)\nFirst RAM Value = (Third state table bytes)
+P:1C60E:Write_State_Table_Based_Values_to_RAM_Loop
+P:1C61E:__C61E
+P:1C622:__C622_Loop
+P:1C634:__C634_Loop
+P:1C643:__C643
+P:1C646:__C646
+P:1C658:__C658
+P:1C660:__C660
+P:1C668:__C668
+P:1C670:Skip_to_Right_Nibble_for_E_C670:\nEx Block of values
+P:1C68E:Change_State_Table_Location_Temp:Copy Opponent State ROM location address into $9E/$9F\nPerhaps we are going to temporarily change the Opponent State table location.
+P:1C69D::Save most recent State table index value to backup location
+P:1C69F::\nSave new State table ROM address that was just pulled from the State table
+P:1C6A3::Reset State Index
+P:1C6AA:Restore_Previous_State_Table:\nFinished alternate State Table. Restore Original.
+P:1C6BD:Copy_Variable_State_Time_to_Opp_State_Timer
+P:1C6C3:Clear_Opponent_Punching_Flag
+P:1C6CA:__C6CA
+P:1C6CC::Deactivate bit 5 for PPU0 load (register 0)
+P:1C6D0:Save_PPU0_Load_for_Register_0
+P:1C6D2::Value from X written to $80 (What is $80?)
+P:1C6D7:__C6D7
+P:1C6D9::Activate bit 5 for PPU0 load (register 0)
+P:1C6DF:Word_Value_Check_from_State_Table
+P:1C6EA:Round_Timer_Toggles
+P:1C6F6:Round_Timer_Control_Toggle
+P:1C70C:Sound_Engine_Loader
+P:1C710::Temp Save A to Y
+P:1C711::Take lower 2 bits and put in X (Used as Offset below)
+P:1C714::Restore A
+P:1C715::Get upper 6 bits
+P:1C71B:Write_Sound_Engine_Byte
+P:1C720:Skip_to_Right_Nibble_for_F_C720:Fx Block of values
+P:1C744:Punch_Status_Check
+P:1C746::Is Opponent punch already active?
+P:1C748::Did Mac manage to duck/block/dodge or get hit
+P:1C74C::Assign punch active (#$80)
+P:1C74E:__C74E
+P:1C751:__C751
+P:1C765:__C765
+P:1C770:Change_State_Table_Location_and_Index_Temp
+P:1C772::X holds new State Table ROM address LB
+P:1C776::$E0 holds new State Table ROM address HB
+P:1C77B::Y holds new State Index value
+P:1C784:Zero_Page_Value_Check_from_State_Table:\nCheck Value at specified address against specified rValue
+P:1C787::A Zero Page RAM Address
+P:1C789::No high byte because Zero Page.
+P:1C78B:Value_Check_from_State_Table
+P:1C78D::Next value in State table determines...?
+P:1C790::Save State increase of +2
+P:1C794::\nCompare RAM Address to State table value.\nIf equal, load next value from state table and USE IT AS STATE INDEX.\nIf not equal, proceed with state table using next index value.
+P:1C798:__C798_Next_State_value_is_Next_State_Index:\nCurrent RAM Address value = value loaded from table\nResults met. Load next State Table value into State Index.
+P:1C79D:__C79D_Save_State_Index
+P:1C7A2:__C7A2_Continue_State_Table
+P:1C7A7:Decrement_Repeat_Counter
+P:1C7AB::Still repeating sequence. Load starting state index
+P:1C7AE:__C7AE
+P:1C7B3:__C7B3
+P:1C7B6:Set_Opponent_Cur_State_to_81:Highest bit set = Initialize new Opponent State
+P:1C7BB:Set_Opponent_Repeat_Counter
+P:1C7C2:Set_Opponent_Punch_Side_and_Damage
+P:1C7CC:Update_Opponent_State_Index_and_Check_Next_State
+P:1C7D1:Set_Opponent_Quad_Defense:\nLoad four defense values from State Table and save to RAM
+P:1C7D5:Opponent_Defense_Write_Loop
+P:1C7E1:Increment_Mac_Index_x2_and_Set_State_Timer_to_1
+P:1C7EA:Start_Opponent_Punch_and_Action
+P:1C7F1:Write_to_Address_and_Value_from_State_Table:\nUpdate RAM address with value. Both come from State Table.
+P:1C7F8::Pointer to Address to Update in RAM
+P:1C801::Saved loaded value to this location
+P:1C806:Copy_585_into_Combo_Timer
+P:1C80C:Check_Combo_Timer
+P:1C813:__C813
+P:1C81D:Set_Opponent_State_Status_to_82
+P:1C821:Decrement_Opponent_State_Index
+P:1C825:Save_Opponent_State_Status
+P:1C830:Add_Value_Pair_to_RAM_Address_Sub
+P:1C83E:Add_Value_to_RAM_Address_Sub
+P:1C844:Call_Get_Left_Nibble_Sub
+P:1C84F:__C84F_RTS
+P:1C88F:__C88F_RTS
+G:2000:PpuControl_2000:7  bit  0\n---- ----\nVPHB SINN\n|||| ||||\n|||| ||++- Base nametable address\n|||| ||    (0 = $2000; 1 = $2400; 2 = $2800; 3 = $2C00)\n|||| |+--- VRAM address increment per CPU read/write of PPUDATA\n|||| |     (0: add 1, going across; 1: add 32, going down)\n|||| +---- Sprite pattern table address for 8x8 sprites\n||||       (0: $0000; 1: $1000; ignored in 8x16 mode)\n|||+------ Background pattern table address (0: $0000; 1: $1000)\n||+------- Sprite size (0: 8x8; 1: 8x16)\n|+-------- PPU master/slave select\n|          (0: read backdrop from EXT pins; 1: output color on EXT pins)\n+--------- Generate an NMI at the start of the\n           vertical blanking interval (0: off; 1: on)
+G:2001:PpuMask_2001:7  bit  0\n---- ----\nBGRs bMmG\n|||| ||||\n|||| |||+- Display type: (0: color, 1: grayscale)\n|||| ||+-- 1: Show background in leftmost 8 pixels of screen, 0: Hide\n|||| |+--- 1: Show sprites in leftmost 8 pixels of screen, 0: Hide\n|||| +---- 1: Show background\n|||+------ 1: Show sprites\n||+------- Emphasize red\n|+-------- Emphasize green\n+--------- Emphasize blue
+G:2002:PpuStatus_2002:7  bit  0\n---- ----\nVSO. ....\n|||| ||||\n|||+-++++- Least significant bits previously written into a PPU register\n|||        (due to register not being updated for this address)\n||+------- Sprite overflow. The intent was for this flag to be set\n||         whenever more than eight sprites appear on a scanline, but a\n||         hardware bug causes the actual behavior to be more complicated\n||         and generate false positives as well as false negatives; see\n||         PPU sprite evaluation. This flag is set during sprite\n||         evaluation and cleared at dot 1 (the second dot) of the\n||         pre-render line.\n|+-------- Sprite 0 Hit.  Set when a nonzero pixel of sprite 0 overlaps\n|          a nonzero background pixel; cleared at dot 1 of the pre-render\n|          line.  Used for raster timing.\n+--------- Vertical blank has started (0: not in vblank; 1: in vblank).\n           Set at dot 1 of line 241 (the line *after* the post-render\n           line, false); cleared after reading $2002 and at dot 1 of the\n           pre-render line.
+G:2003:OamAddr_2003:Set OAM address - Write only
+G:2004:OamData_2004:Read/Write OAM data
+G:2005:PpuScroll_2005:Set PPU scroll, write twice - Write only
+G:2006:PpuAddr_2006:Set PPU address, write twice - Write only
+G:2007:PpuData_2007:Read/Write VRAM
+G:4000:Sq0Duty_4000:DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:4001:Sq0Sweep_4001:EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)
+G:4002:Sq0Timer_4002:TTTT TTTT\nTimer low (T)
+G:4003:Sq0Length_4003:LLLL LTTT\nLength counter load (L), timer high (T)
+G:4004:Sq1Duty_4004:DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:4005:Sq1Sweep_4005:EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)
+G:4006:Sq1Timer_4006:TTTT TTTT\nTimer low (T)
+G:4007:Sq1Length_4007:LLLL LTTT\nLength counter load (L), timer high (T)
+G:4008:TrgLinear_4008:CRRR RRRR\nLength counter halt / linear counter control (C), linear counter load (R)
+G:400A:TrgTimer_400A:TTTT TTTT\nTimer low (T)
+G:400B:TrgLength_400B:LLLL LTTT\nLength counter load (L), timer high (T)
+G:400C:NoiseVolume_400C:--LC VVVV\nEnvelope loop / length counter halt (L), constant volume (C), volume/envelope (V)
+G:400E:NoisePeriod_400E:L--- PPPP\nLoop noise (L), noise period (P)
+G:400F:NoiseLength_400F:LLLL L---\nLength counter load (L)
+G:4010:DmcFreq_4010:IL-- RRRR\nIRQ enable (I), loop (L), frequency (R)
+G:4011:DmcCounter_4011:-DDD DDDD\nLoad counter (D)
+G:4012:DmcAddress_4012:AAAA AAAA\nSample address (A)
+G:4013:DmcLength_4013:LLLL LLLL\nSample length (L)
+G:4014:SpriteDma_4014:Writing $XX will upload 256 bytes of data from CPU page $XX00-$XXFF to the internal PPU OAM.
+G:4015:ApuStatus_4015:Read:\nIF-D NT21\nDMC interrupt (I), frame interrupt (F), DMC active (D), length counter > 0 (N/T/2/1)\n\nWrite:\n---D NT21\nEnable DMC (D), noise (N), triangle (T), and pulse channels (2/1)
+G:4016:Ctrl1_4016:Read (NES - input):\n---4 3210\nRead data from controller port #1.\n\nWrite:\n---- ---A\nOutput data (strobe) to both controllers.
+G:4017:Ctrl2_FrameCtr_4017:Read (NES - input):\n---4 3210\nRead data from controller port #2.\n\nWrite (Frame counter): MI-- ----\nMode (M, 0 = 4-step, 1 = 5-step), IRQ inhibit flag (I)
